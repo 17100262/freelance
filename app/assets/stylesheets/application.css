@@ -17,3 +17,16 @@
 .edit_user label::after {
     content: ':';
 }
+
+@media (min-width: 768px){
+.col-md-10.form-large {
+    -ms-flex: 0 0 87.333333%;
+    flex: 0 0 87.333333%;
+    max-width: 87.333333%;
+}}
+@media (min-width: 768px){
+.col-md-2.form-large {
+    -ms-flex: 0 0 12.666666%;
+    flex: 0 0 12.666666%;
+    max-width: 12.666667%;
+}}
