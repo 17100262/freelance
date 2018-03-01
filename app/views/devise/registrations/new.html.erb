@@ -1,0 +1,39 @@
+<div class="container-fluid pt-5 pb-5" style="background:#F7F7F7">
+  <div class="row">
+  	  <div class="loginmodal-container">
+  			<div class="loginmodal-container-2">
+  				<h1>Join Freelance</h1>
+            <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+                <%= devise_error_messages! %>
+          				<%= link_to 'Continue with Facebook',  "#{root_url}users/auth/facebook" ,:class => "login loginmodal-button loginmodal-social loginmodal-fb" %>
+      						<%= link_to 'Continue with Linkedin',  "#{root_url}users/auth/linkedin" ,:class => "login loginmodal-button loginmodal-social loginmodal-ln" %>
+      						<%= link_to 'Continue with Google',  "#{root_url}users/auth/google_oauth2" ,:class => "login loginmodal-button loginmodal-google" %>
+      						<%= link_to 'Continue with Twitter',  "#{root_url}users/auth/twitter" ,:class => "login loginmodal-button loginmodal-social loginmodal-tw" %>
+          			<div class="row">
+    							<div class="col-md-5 col-sm-5 col-xs-5">
+    								<hr class="hr-or">
+    							</div>
+    							<div class="col-md-2 col-sm-2 col-xs-2">
+    								<p class="or">or</p>
+    							</div>
+    							<div class="col-md-5 col-sm-5 col-xs-5">
+    								<hr class="hr-or">
+    							</div>
+    						</div>
+                <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control input-md", placeholder: "Enter Your Email" , id: "join_email" %>
+    						<!--<input type="text" placeholder="Choose a Username" class="form-control input-lg" oninput="this.className = 'form-control input-lg'"  name="uname">-->
+                <%= f.text_field :username ,class: "form-control input-md", placeholder: "Enter Your Username" %>
+                <%= f.password_field :password, autocomplete: "off", class: "form-control input-md", placeholder: "Enter Your Password"  , id: "join_pword" %>
+                <%= f.password_field :password_confirmation, autocomplete: "off", class: "form-control input-md", placeholder: "Confirm Your Password", id: "join_cpword" %>
+    					
+    					  <%= f.submit "Sign Up", class: "login loginmodal-button loginmodal-submit" %>
+      			<% end %>
+  				
+  			</div>
+  				<hr class="hr-or">
+  				<p style="text-align: center;">Already a Member? <a href="/users/sign_in"> Login </a></p>
+  		</div> 
+  </div>
+</div>
+
+<%#= render "devise/shared/links" %>
