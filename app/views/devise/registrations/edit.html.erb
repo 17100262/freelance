@@ -48,17 +48,19 @@
                 </div>
       			<% end %>
   				
-  			
   				<hr class="hr-or">
   				<div class="row">
-  				  <div class="col-md-5">
-  				    Unhappy?
-  				  </div>
-  				  <div class="col-md-7 text-right">
-  				    <%= link_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, class:"" %>
-  				  </div>
-  			</div>	  
+  				    <center class="w-100">
+  				      <%= link_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, class:"btn btn-link" %>
+  				    </center>
   				</div>
+  				
+  				<div class="row">
+  				  <center class="w-100">
+  				    <a href="/" class="btn btn-link">Back to Home</a>
+  				  <center>  
+  				</div>
+  			</div>
   		</div> 
   </div>
 </div>

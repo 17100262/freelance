@@ -12,7 +12,7 @@ html {
 body {
 	background-color: #FFF;
 	color: #777;
-	font-family: "Open Sans", Arial, sans-serif;
+	font-family: Arial, sans-serif;
 	font-size: 14px;
 	line-height: 22px;
 	margin: 0;
@@ -34,6 +34,7 @@ li {
 }
 /* Header */
 #header {
+	border-bottom:1px solid #ED8446;
 	position: relative;
 	z-index: 1030;
 }
@@ -3360,14 +3361,13 @@ html.dark .text-muted {
 	background: #0e0e0e;
 	border-top: 4px solid #0e0e0e;
 	font-size: 0.9em;
-	margin-top: 50px;
-	padding: 70px 0 0;
+	padding: 0;
 	position: relative;
 	clear: both;
 }
 
 #footer .container .row > div {
-	margin-bottom: 25px;
+	margin-bottom: 0px;
 }
 
 #footer .container input:focus {
@@ -3540,8 +3540,8 @@ html.dark .text-muted {
 #footer .footer-copyright {
 	background: #060606;
 	border-top: 4px solid #060606;
-	margin-top: 40px;
-	padding: 30px 0 10px;
+	margin-top: 0px;
+	padding: 10px 0 15px 10px;
 }
 
 #footer .footer-copyright nav {

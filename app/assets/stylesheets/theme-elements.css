@@ -5255,8 +5255,7 @@ html.boxed .pricing-table .plan, html.boxed .pricing-table h3 {
 	padding: 0 0 1.2rem 0;
 }
 
-.feature-box.feature-box-style-4 .feature-box-icon i.fa,
-.feature-box.feature-box-style-4 .feature-box-icon i.icons {
+.feature-box.feature-box-style-4 .feature-box-icon i{
 	font-size: 2.35em;
 	width: auto;
 	height: auto;

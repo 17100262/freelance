@@ -5,8 +5,8 @@
 				<div class="header-column">
 					<div class="header-row">
 						<div class="header-logo">
-							<a href="index.html">
-								<img alt="Freelance" height="48px" src="/logo_temp.jpg">
+							<a href="/" style="text-decoration:none;">
+								<img alt="Freelance" height="48px" src="/logo_temp.jpg">&nbsp;&nbsp; <strong style="font-size:25px; vertical-align: middle;">FREELANCE</strong>
 							</a>
 						</div>
 					</div>
@@ -20,13 +20,6 @@
 										
                     <li class="">
                       <a class="nav-link active" href="<%= root_path %>">Home <span class="sr-only">(current)</span></a>
-                    </li>
-                    <li class="">
-                      <% if user_signed_in? %>
-                          <a class="nav-link" href="<%= destroy_user_session_path %>" data-method="delete">Log Out</a>
-                      <% else %>
-                          <a class="nav-link" href="<%= new_user_registration_path %>">Sign Up</a>
-                      <% end %>
                     </li>
                       <% if user_signed_in? %>
                     
@@ -43,7 +36,13 @@
                             <a class="nav-link" href="<%= admin_path %>">Admin Dashboard</a>
                           </li>
                         <% end %>
-                        
+		                    <li class="">
+		                      <% if user_signed_in? %>
+		                          <a class="nav-link" href="<%= destroy_user_session_path %>" data-method="delete">Log Out</a>
+		                      <% else %>
+		                          <a class="nav-link" href="<%= new_user_registration_path %>">Sign Up</a>
+		                      <% end %>
+		                    </li>
                       <% end %>
                     <!--<li class="">-->
                     <!--  <a class="nav-link disabled" href="#">Disabled</a>-->
