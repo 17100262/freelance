@@ -232,3 +232,12 @@ a.loginmodal-button:hover{
 .loginmodal-container.loginmodal-container-edit{
   max-width:1000px !important;
 }
+.loginmodal-container.loginmodal-user-edit{
+  max-width:530px !important;
+}
+.loginmodal-user-edit .form-group{
+  margin-bottom:0 !important;
+}
+.field_with_errors{
+  width:100% !important;
+}

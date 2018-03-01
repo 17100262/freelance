@@ -4,7 +4,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable, :lockable,
          :recoverable, :rememberable, :confirmable, :trackable, :validatable,:omniauthable, omniauth_providers: %i[facebook linkedin google_oauth2 twitter]
   
-  validates_uniqueness_of :username       
+  # validates_uniqueness_of :username       
   def make_admin
     self.update!(admin: true)
   end

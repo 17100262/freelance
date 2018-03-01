@@ -1,33 +1,5 @@
-
-
-
-
-
-<header id="header" class="header-narrow" data-plugin-options="{'stickyEnabled': true, 'stickyEnableOnBoxed': true, 'stickyEnableOnMobile': true, 'stickyStartAt': 57, 'stickySetTop': '-55px', 'stickyChangeLogo': false}">
+<header id="header" class="header-narrow">
 	<div class="header-body">
-		<div class="header-top header-top-style-4">
-			<div class="container">
-				<div class="header-row pb-1">
-					<div class="header-column justify-content-end">
-						<div class="header-row">
-							<p>
-								<span class="mr-1"><i class="icon-call-end icons mr-1"></i> (123) 456-789</span><span class="d-none d-sm-block"></span>
-							</p>
-							<div class="header-search d-none d-md-block">
-								
-									<div class="input-group">
-										<input type="text" class="form-control" name="q" id="q" placeholder="Search..." required>
-										<span class="input-group-btn">
-											<button class="btn btn-light" type="submit"><i class="fa fa-search"></i></button>
-										</span>
-									</div>
-								
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
 		<div class="header-container container">
 			<div class="header-row">
 				<div class="header-column">
@@ -63,7 +35,7 @@
                         </li>
                         
                         <li class="">
-                          <a class="nav-link" href="<%= edit_user_path(current_user) %>">Profile</a>
+                          <a class="nav-link" href="<%= edit_user_path(current_user) %>">Update Profile</a>
                         </li>
                         
                         <% if current_user.admin %>
