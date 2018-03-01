@@ -229,3 +229,6 @@ a.loginmodal-button:hover{
   color:#555555;
   text-decoration:none;
 }
+.loginmodal-container.loginmodal-container-edit{
+  max-width:550px !important;
+}

@@ -11,20 +11,23 @@
 
   <body>
     <%# unless params[:controller]=='home' && params[:action]=='admin' %>
-      <%= render 'layouts/header' %>
-      <% if notice || alert %>
-        <div class="alert alert-info" role="alert">
-          <strong>Info!</strong> <%= notice || alert %>
-        </div>
-      <% end %>
-      <% unless params[:controller]=='home' && params[:action]=='admin' %>
-      
-      <% end %>  
-        <%= yield %>
-    <% unless params[:controller]=='home' && params[:action]=='admin' %>
-      
-    <% end %>
-      <%= render 'layouts/footer' %>
-    
+      <div class="body">
+          <%= render 'layouts/header' %>
+          <% if notice || alert %>
+            <div class="alert alert-info" role="alert">
+              <strong>Info!</strong> <%= notice || alert %>
+            </div>
+          <% end %>
+          <div role="main" class="main">
+          <% unless params[:controller]=='home' && params[:action]=='admin' %>
+          
+          <% end %>  
+            <%= yield %>
+          <% unless params[:controller]=='home' && params[:action]=='admin' %>
+                 
+          <% end %>
+          </div>
+          <%= render 'layouts/footer' %>
+      </div> 
   </body>
 </html>
