@@ -8,7 +8,8 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       set_flash_message(:notice, :success, kind: "Facebook") if is_navigational_format?
     else
       session["devise.facebook_data"] = request.env["omniauth.auth"]
-      redirect_to new_user_registration_url, notice: @user.errors.full_messages.join(",")
+      render "/users/complete_sign_up"
+      # redirect_to new_user_registration_url, notice: @user.errors.full_messages.join(",")
     end
   end
 
@@ -25,7 +26,8 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       set_flash_message(:notice, :success, kind: "LinkedIn") if is_navigational_format?
     else
       session["devise.linkedin_data"] = request.env["omniauth.auth"]
-      redirect_to new_user_registration_url, notice: @user.errors.full_messages.join(",")
+      # redirect_to new_user_registration_url, notice: @user.errors.full_messages.join(",")
+      render "/users/complete_sign_up"
     end
       
   end
@@ -38,7 +40,11 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       set_flash_message(:notice, :success, kind: "Google") if is_navigational_format?
     else
       session["devise.google_data"] = request.env["omniauth.auth"].except("extra")
-      redirect_to new_user_registration_url, notice: @user.errors.full_messages.join(",")
+      # byebug
+      # redirect_to new_user_registration_url, notice: @user.errors.full_messages.join(",")
+      render "/users/complete_sign_up"
+      
+      # redirect_to controller: '/users',action: 'complete_sign_up', param1: @user
     end
     
   end
@@ -51,7 +57,8 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       set_flash_message(:notice, :success, kind: "Twitter") if is_navigational_format?
     else
       session["devise.twitter_data"] = request.env["omniauth.auth"].except("extra")
-      redirect_to new_user_registration_url, notice: @user.errors.full_messages.join(",")
+      # redirect_to complete_sign_up_users_path(@user), notice: @user.errors.full_messages.join(",")
+      render "/users/complete_sign_up"
     end
     
   end

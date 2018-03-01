@@ -4,7 +4,12 @@ Rails.application.routes.draw do
   root 'home#home'
   get 'admin', to: 'home#admin', as: :admin
   # get 'users/profile/edit', to: 'users#edit_profile', as: :edit_profile
-  resources :users
+  resources :users do
+    collection do
+      get :complete_sign_up
+      post :completed_sign_up
+    end
+  end
   # , path: '/users/profile'
 
 end

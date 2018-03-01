@@ -1,0 +1,27 @@
+<div class="container-fluid pt-5 pb-5" style="background:#F7F7F7">
+  <div class="row">
+  	  <div class="loginmodal-container">
+  			<div class="loginmodal-container-2">
+  				<h1>Join Freelance</h1>
+            <%= form_for(@user, url: completed_sign_up_users_path, method: :post) do |f| %>
+                <% if @user.errors.full_messages.any? %>
+                  <% @user.errors.full_messages.each do |error_message| %>
+                    <%= error_message %> <br />
+                  <% end %>
+                <% end %>
+                
+                <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control form-control-md", placeholder: "Enter Your Email" , id: "join_email" %>
+    						<!--<input type="text" placeholder="Choose a Username" class="form-control input-lg" oninput="this.className = 'form-control input-lg'"  name="uname">-->
+                <%= f.text_field :username ,class: "form-control form-control-md", placeholder: "Enter Your Username" %>
+                <%#= f.password_field :password, autocomplete: "off", class: "form-control form-control-md", placeholder: "Enter Your Password"  , id: "join_pword" %>
+                <%#= f.password_field :password_confirmation, autocomplete: "off", class: "form-control form-control-md", placeholder: "Confirm Your Password", id: "join_cpword" %>
+    					
+    					  <%= f.submit "Sign Up", class: "login loginmodal-button loginmodal-submit" %>
+      			<% end %>
+  				
+  			</div>
+  				<hr class="hr-or">
+  				<p style="text-align: center;">Already a Member? <a href="/users/sign_in"> Login </a></p>
+  		</div> 
+  </div>
+</div>
