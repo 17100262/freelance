@@ -14,3 +14,6 @@
  *= require_self
  */
 
+.edit_user label::after {
+    content: ':';
+}
