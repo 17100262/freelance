@@ -52,7 +52,7 @@ class JobsController < ApplicationController
       if @job.save
         
         @job.blocked_users.create(user_id: current_user.id)
-        format.html { redirect_to express_job_path(@job), notice: 'Job was successfully created.' }
+        format.html { redirect_to @job }
         format.json { render :show, status: :created, location: @job }
       else
         format.html { render :new }
