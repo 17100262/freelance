@@ -51,7 +51,7 @@ class ReservationsController < ApplicationController
 
     respond_to do |format|
       if @reservation.save
-        format.html { redirect_to @reservation }
+        format.html { redirect_to express_reservation_path(@reservation) }
         format.json { render :show, status: :created, location: @reservation }
       else
         format.html { render :new }
