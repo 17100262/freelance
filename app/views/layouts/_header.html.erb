@@ -22,7 +22,10 @@
                       <a class="nav-link active" href="<%= root_path %>">Home <span class="sr-only">(current)</span></a>
                     </li>
                       <% if user_signed_in? %>
-                    
+                    		<li class="">
+                          <a class="nav-link" href="/jobs">Jobs</a>
+                        </li>
+                        
                         <li class="">
                           <a class="nav-link" href="<%= edit_user_registration_path %>">Settings</a>
                         </li>
@@ -33,7 +36,11 @@
                         
                         <% if current_user.admin %>
                           <li class="">
-                            <a class="nav-link" href="<%= admin_path %>">Admin Dashboard</a>
+                            <a class="nav-link" href="<%= admin_panel_path %>">Admin Dashboard</a>
+                          </li>
+                        <% else %>
+                        	<li class="">
+                            <a class="nav-link" href="<%= user_panel_path %>">Dashboard</a>
                           </li>
                         <% end %>
 		                    

@@ -1,0 +1,86 @@
+<%= bootstrap_form_for(job) do |form| %>
+  <% if job.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(job.errors.count, "error") %> prohibited this job from being saved:</h2>
+
+      <ul>
+        <% job.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label "Title *" %>
+    <%= form.text_field :title, id: :job_title,hide_label: true,required: true %>
+  </div>
+
+  <div class="field">
+    <%= form.label "Description *" %>
+    <%= form.text_area :description, id: :job_description,hide_label: true,required: true %>
+  </div>
+
+  <div class="field">
+    <%= form.label "Deliverables *" %>
+    <%= form.text_area :deliverables, id: :job_deliverables,hide_label: true,required: true %>
+  </div>
+
+  <div class="field">
+    <%= form.number_field :duration, id: :job_duration,label: "Duration in Days *",required: true %>
+  </div>
+
+  <div class="field">
+    <%= form.label "Language *" %>
+    <%= form.text_field :language, id: :job_language,hide_label: true,required: true %>
+  </div>
+
+  <div class="field">
+    <%= form.number_field :amount, id: :job_amount,label: "Amount in USD *",required: true %>
+  </div>
+
+  <div class="field">
+    <%= form.select :online, [["Choose your job type",nil],["Online", 1], ["Local", 0]],{ label: "Choose your job type *" },{class: "selectpicker",required: true} %>
+    <!--<= form.check_box :online, id: :job_online,label: "Online/Local"%>-->
+  </div>
+
+  <div class="field" id="address">
+    <%= form.label "Address *" %>
+    <%= form.text_area :address, id: :job_address,hide_label: true %>
+  </div>
+
+  <div class="field">
+    <%= form.hidden_field :user_id, id: :job_user_id,hide_label: true %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit "Submit" %>
+  </div>
+<% end %>
+
+
+<script>
+  $(document).ready(function(){
+    $('#address').css("display", "none");
+});
+$(document).ready(function(){
+    var $online = $('#job_online');
+    var $address = $('#job_address');
+    
+    
+    $online.change(function() {
+     setTimeout(function() {
+       
+        if ($online.val() == 0) {
+          $('#address').css("display", "block");
+           $('#job_address').prop('required',true);
+        }
+        else{
+            $('#address').css("display", "none");
+            $('#job_address').prop('required',false);
+        }
+    },200);
+    })
+    
+});
+</script>

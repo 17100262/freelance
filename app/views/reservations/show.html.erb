@@ -1,0 +1,88 @@
+<div class="container py-4">
+  <div id="countdown">
+    <div class="time_label">
+      Time Remaining
+    </div>
+    <div id='tiles'></div>
+      <div class="labels">
+        <li>Days</li>
+        <li>Hours</li>
+        <li>Mins</li>
+        <li>Secs</li>
+      </div>
+  </div>
+  
+  <div class="featured-boxes featured-boxes-style-8">
+    <div class="row">
+	    <div class="col-lg-12">
+        <div class="featured-box featured-box-primary featured-box-text-left">
+    			<div class="box-content">
+    			  <h2 class="text-center">Order Details</h2>
+    			  <p>
+              <strong>User:</strong>
+              <%= @reservation.user.email %>
+            </p>
+            
+            <p>
+              <strong>Job:</strong>
+              <% job = @reservation.job %>
+              <%= link_to job.title, job_path(job.slug) %>
+            </p>
+            
+            <p>
+              <strong>Ending time:</strong>
+              <%= @reservation.ending_time %>
+            </p>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>  
+</div>
+  
+
+</div>
+
+<!--< if @reservation.status == "LIVE" %>-->
+<script>
+  // $(document).on('turbolinks:load',function(){
+  // var target_date = new Date().getTime() + (1000*3600*48); // set the countdown date
+    var date = "<%= @reservation.ending_time %>"
+    var target_date = new Date(date).getTime(); // set the countdown date
+    
+    var days, hours, minutes, seconds; // variables for time units
+    
+    var countdown = document.getElementById("tiles"); // get tag element
+    
+    getCountdown();
+    
+    setInterval(function () { getCountdown(); }, 1000);
+    
+    function getCountdown(){
+    
+    	// find the amount of "seconds" between now and target
+    	var current_date = new Date().getTime();
+    	var seconds_left = (target_date - current_date) / 1000;
+    
+    	days = pad( parseInt(seconds_left / 86400) );
+    	seconds_left = seconds_left % 86400;
+    		 
+    	hours = pad( parseInt(seconds_left / 3600) );
+    	seconds_left = seconds_left % 3600;
+    		  
+    	minutes = pad( parseInt(seconds_left / 60) );
+    	seconds = pad( parseInt( seconds_left % 60 ) );
+    
+    	// format countdown string + set tag value
+    	countdown.innerHTML = "<span>" + days + "</span><span>" + hours + "</span><span>" + minutes + "</span><span>" + seconds + "</span>"; 
+    }
+    
+    function pad(n) {
+    	return (n < 10 ? '0' : '') + n;
+    }
+  
+  // })
+
+</script>
+<!--< end %>-->

@@ -89,6 +89,7 @@ border-radius: 3px;
 }
 
 .loginmodal-submit {
+  cursor: pointer;
   padding: 9px 15px !important;
   border:0 !important;
   color: #fff !important;

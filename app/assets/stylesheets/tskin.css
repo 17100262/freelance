@@ -3771,11 +3771,11 @@ html .featured-box-primary .icon-featured {
 }
 
 html .featured-box-primary h4 {
-	color: #ed8446;
+	color: inherit;
 }
 
 html .featured-box-primary .box-content {
-	border-top-color: #ed8446;
+	border-top-color: #ccc;
 }
 
 html .featured-box-secondary .icon-featured {

@@ -21,14 +21,20 @@
             </div>
           <% end %>
           
-          <div role="main" class="main" style="min-height:72vh;">
+          <div class="container-fluid main" style="background: #f5f5f5; padding:0;">
+          <div role="main" class="main" style="min-height:82.5vh;">
+
           <%# unless params[:controller]=='home' && params[:action]=='admin' %>
           
-          <%# end %>  
+          <%# end %> 
+            <% if user_signed_in? %>
+              <%= render ( ("layouts/admin_dash_nav" if current_user.is_admin?) || "layouts/user_dash_nav") %>
+            <% end %>
             <%= yield %>
           <%# unless params[:controller]=='home' && params[:action]=='admin' %>
                  
           <%# end %>
+          </div>
           </div>
           <%= render 'layouts/footer' unless params[:controller]=='home' && params[:action]=='admin' %>
       </div> 

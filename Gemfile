@@ -60,3 +60,7 @@ gem 'omniauth-linkedin-oauth2'
 gem 'omniauth-google-oauth2'
 gem 'omniauth-twitter'
 gem "figaro"
+gem "bootstrap_form"
+gem 'friendly_id', '~> 5.1.0'
+gem "paperclip", "~> 6.0.0"
+

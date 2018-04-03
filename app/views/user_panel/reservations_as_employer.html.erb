@@ -1,0 +1,53 @@
+<div class="container jobs py-4">
+  <div class="row">
+    <div class="col-md-6">
+      <h4>My Reservations as Employer</h4>
+    </div>
+    <div class="col-md-6 text-right">
+      <%= link_to "Add New Job", new_job_path,class: 'btn btn-primary btn-sm' %>
+    </div>
+  </div>
+  <hr class="solid tall m-0">
+  <div class="tabs tabs-bottom tabs-center tabs-simple">
+		<ul class="nav nav-tabs">
+      <%= ('<li class="nav-item active">'.html_safe if @status=="PENDING" ) ||  '<li>'.html_safe %> <a class="nav-link" href="<%=user_empreserves_path(status: 'PENDING')%>">PENDING  <span class="badge badge-default badge-sm <%= ('badge-primary' if @count["PENDING"].present?)%>"><%= @count["PENDING"] || 0 %> </span> </a></li>
+      <%= ('<li class="nav-item active">'.html_safe if @status=="LIVE" ) ||  '<li>'.html_safe %> <a class="nav-link" href="<%=user_empreserves_path(status: 'LIVE')%>">LIVE  <span class="badge badge-default badge-sm <%= ('badge-primary' if @count["LIVE"].present?)%>"><%= @count["LIVE"] || 0%> </span></a></li>
+      <%= ('<li class="nav-item active">'.html_safe if @status=="RESERVED" ) ||  '<li>'.html_safe %> <a class="nav-link" href="<%=user_empreserves_path(status: 'RESERVED')%>">RESERVED  <span class="badge badge-default badge-sm <%= ('badge-primary' if @count["RESERVED"].present?)%>"><%= @count["RESERVED"] || 0%> </span></a></li>
+      <%= ('<li class="nav-item active">'.html_safe if @status=="DELIVERED" ) ||  '<li>'.html_safe %> <a class="nav-link" href="<%=user_empreserves_path(status: 'DELIVERED')%>">DELIVERED  <span class="badge badge-default badge-sm <%= ('badge-primary' if @count["DELIVERED"].present?)%>"><%= @count["DELIVERED"] || 0%> </span></a></li>
+      <%= ('<li class="nav-item active">'.html_safe if @status=="COMPLETED" ) ||  '<li>'.html_safe %> <a class="nav-link" href="<%=user_empreserves_path(status: 'COMPLETED')%>">COMPLETED  <span class="badge badge-default badge-sm <%= ('badge-primary' if @count["COMPLETED"].present?)%>"><%= @count["COMPLETED"] || 0%> </span></a></li>
+      <%= ('<li class="nav-item active">'.html_safe if @status=="CANCELLED" ) ||  '<li>'.html_safe %> <a class="nav-link" href="<%=user_empreserves_path(status: 'CANCELLED')%>">CANCELLED  <span class="badge badge-default badge-sm <%= ('badge-primary' if @count["CANCELLED"].present?)%>"><%= @count["CANCELLED"] || 0%> </span></a></li>
+      <%= ('<li class="nav-item active">'.html_safe if @status=="INREVISION" ) ||  '<li>'.html_safe %> <a class="nav-link" href="<%=user_empreserves_path(status: 'INREVISION')%>">IN REVISION  <span class="badge badge-default badge-sm <%= ('badge-primary' if @count["INREVISION"].present?)%>"><%= @count["INREVISION"] || 0%> </span></a></li>
+      
+    </ul>
+  </div>
+  
+  <div class="panel-body">
+    <div class="table-responsive">
+    <table class="table table-jobs table-bjobed table-bordered table-job">
+    <thead>
+      <tr>
+        <th>Reservation #</th>
+        <th>User Name</th>
+        <th>Job Name</th>
+        <th>Amount</th>
+        <th>Reserved At</th>
+      </tr>
+    </thead>
+  
+    <tbody>
+      <% @reservations.each do |reserv| %>
+        <tr>
+          <td><%= link_to reserv.slug, reservations_path(reserv.slug) %></td>
+          <td><%= reserv.user.email %></td>
+          <td><%= link_to reserv.job.title.truncate(100), job_path(reserv.job.slug) %></td>
+          <td><%= reserv.job.amount %></td>
+          <td><%= reserv.created_at %></td>
+          <td><%= link_to "View Details", reservations_path(reserv.slug), class:"btn btn-link btn-md" %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  </div>
+  </div>
+
+</div>

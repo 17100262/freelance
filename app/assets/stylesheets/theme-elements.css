@@ -168,6 +168,7 @@ h6.text-shadow {
 }
 
 .heading.heading-bottom-border h1 {
+	font-size:2em;
 	border-bottom: 5px solid #DBDBDB;
 	padding-bottom: 10px;
 }
@@ -1018,7 +1019,13 @@ html[dir="rtl"] .input-group-btn:not(:last-child) > .btn:not(:first-child) {
 }
 
 .badge.badge-sm {
-	padding: 0.5em 0.8em;
+	padding: 0.3em 0.5em;
+    border-radius: 50%;
+}
+
+.badge-default{
+	color: #fff;
+	background: #ababab;
 }
 
 .badge.badge-md {
@@ -3948,7 +3955,7 @@ hr.gradient-to-left {
 }
 
 hr.solid {
-	background: #DBDBDB;
+	background: #ababab;
 }
 
 hr.light {
@@ -4735,22 +4742,19 @@ html.boxed .pricing-table .plan, html.boxed .pricing-table h3 {
 
 /* Featured Box */
 .featured-box {
-	background: #F5F5F5;
-	background: -webkit-linear-gradient( top , #FFF 1%, #fcfcfc 98%) repeat scroll 0 0 rgba(0, 0, 0, 0);
-	background: linear-gradient(to bottom, #FFF 1%, #fcfcfc 98%) repeat scroll 0 0 rgba(0, 0, 0, 0);
+	background: #FFF;
 	-webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;
 	box-sizing: border-box;
 	border-bottom: 1px solid #DFDFDF;
 	border-left: 1px solid #ECECEC;
-	border-radius: 8px;
+	border-radius: 5px;
 	border-right: 1px solid #ECECEC;
 	box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.04);
 	margin-bottom: 20px;
 	margin-left: auto;
 	margin-right: auto;
 	margin-top: 20px;
-	min-height: 100px;
 	position: relative;
 	text-align: center;
 	z-index: 1;
@@ -4765,12 +4769,12 @@ html.boxed .pricing-table .plan, html.boxed .pricing-table h3 {
 }
 
 .featured-box .box-content {
-	border-radius: 8px;
-	border-top: 1px solid #CCC;
-	border-top-width: 4px;
-	padding: 30px 30px 10px 30px;
-	position: relative;
-	top: -1px;
+	border-radius: 5px;
+    border-top: 1px solid #CCC;
+    border-top-width: 1px;
+    padding: 10px 30px 10px 30px;
+    position: relative;
+    top: -1px;
 }
 
 .featured-box .learn-more {
@@ -4967,8 +4971,8 @@ html.boxed .pricing-table .plan, html.boxed .pricing-table h3 {
 
 /* Featured Boxes */
 .featured-boxes .featured-box {
-	margin-bottom: 30px;
-	margin-top: 45px;
+	margin-bottom: 20px;
+	margin-top: 20px;
 }
 
 /* Effects */

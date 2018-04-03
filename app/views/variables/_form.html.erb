@@ -1,0 +1,32 @@
+<%= bootstrap_form_for(variable) do |form| %>
+  <% if variable.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(variable.errors.count, "error") %> prohibited this variable from being saved:</h2>
+
+      <ul>
+      <% variable.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="row">
+    <div class="col-md-4 col-xs-12">
+      <div class="field">
+        <%= form.text_field :description, id: :variable_description,hide_label: true,placeholder: "Description of variable" %>
+      </div>
+    </div>
+    <div class="col-md-4 col-xs-12">
+      <div class="field">
+        <%= form.number_field :value, id: :variable_value,hide_label: true,placeholder: "Value of variable" %>
+      </div>
+    </div>
+    <div class="col-md-4 col-xs-12">
+      <div class="actions">
+        <%= form.submit "Create" %>
+      </div>
+    </div>
+  </div>
+
+
+<% end %>
