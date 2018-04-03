@@ -1,4 +1,5 @@
 <div class="container py-4">
+<% if @reservation.status == "LIVE" %>  
   <div id="countdown">
     <div class="time_label">
       Time Remaining
@@ -11,14 +12,19 @@
         <li>Secs</li>
       </div>
   </div>
-  
+<% end %>  
+
   <div class="featured-boxes featured-boxes-style-8">
     <div class="row">
 	    <div class="col-lg-12">
         <div class="featured-box featured-box-primary featured-box-text-left">
     			<div class="box-content">
-    			  <h2 class="text-center">Order Details</h2>
+    			  <h2 class="text-center">Reservation Details</h2>
     			  <p>
+              <strong>Status:</strong>
+              <%= @reservation.status %>
+            </p>
+            <p>
               <strong>User:</strong>
               <%= @reservation.user.email %>
             </p>
@@ -28,23 +34,31 @@
               <% job = @reservation.job %>
               <%= link_to job.title, job_path(job.slug) %>
             </p>
-            
             <p>
-              <strong>Ending time:</strong>
-              <%= @reservation.ending_time %>
+              <strong>Job Description:</strong>
+              <%= @reservation.job.description %>
             </p>
-
+            
           </div>
         </div>
       </div>
     </div>
+    
   </div>  
+  <% if user_signed_in? and current_user == @reservation.user and @reservation.status == "PENDING" %>
+    <div class="featured-box" style="padding: 15px;">
+        <center>
+            <h4>You need to process payment before your reservation is placed for this job.</h4>
+            <%= link_to image_tag("https://www.paypal.com/en_US/i/btn/btn_xpressCheckout.gif"), express_reservation_path %>
+        </center>
+    </div>
+  <% end %>
 </div>
   
 
 </div>
 
-<!--< if @reservation.status == "LIVE" %>-->
+<% if @reservation.status == "LIVE" %>
 <script>
   // $(document).on('turbolinks:load',function(){
   // var target_date = new Date().getTime() + (1000*3600*48); // set the countdown date
@@ -85,4 +99,4 @@
   // })
 
 </script>
-<!--< end %>-->
+<% end %>

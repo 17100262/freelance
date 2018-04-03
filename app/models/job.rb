@@ -13,19 +13,19 @@ class Job < ApplicationRecord
   has_many :workers, :through => :reservations,source: :job
   
   
-  def paypal_url(return_path)
-    values = {
-        business: "merchant@gotealeaf.com",
-        cmd: "_xclick",
-        upload: 1,
-        return: "#{Rails.application.secrets.app_host}#{return_path}",
-        invoice: id,
-        amount: self.amount,
-        item_name: self.title,
-        item_number: self.slug,
-        quantity: '1'
+  def purchase(token,ip)
+    response = EXPRESS_GATEWAY.purchase(self.amount_in_cents, express_purchase_options(token,ip))
+    response
+  end
+  def amount_in_cents
+    self.amount * 100
+  end
+  def express_purchase_options(token,ip)
+    { 
+      :ip => ip,
+      :token => token,
+      :payer_id => EXPRESS_GATEWAY.details_for(token).payer_id
     }
-    "#{Rails.application.secrets.paypal_host}/cgi-bin/webscr?" + values.to_query
   end
   
 end

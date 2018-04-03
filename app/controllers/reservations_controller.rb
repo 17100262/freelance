@@ -1,8 +1,31 @@
 class ReservationsController < ApplicationController
-  before_action :set_reservation, only: [:show, :edit, :update, :destroy]
+  before_action :set_reservation, only: [:show, :edit, :update, :destroy,:express,:payment,:confirm_payment]
 
   # GET /reservations
   # GET /reservations.json
+  def express
+    response = EXPRESS_GATEWAY.setup_purchase(@reservation.job.amount_in_cents,
+      :ip                => request.remote_ip,
+      :return_url        => payment_reservation_url(@reservation),
+      :cancel_return_url => root_url,
+      :no_shipping => true
+    )
+    redirect_to EXPRESS_GATEWAY.redirect_url_for(response.token)
+  end
+  def payment
+    @express_token = params[:token]
+  end
+  def confirm_payment
+    response = @reservation.purchase(params[:express_token],request.remote_ip)
+    if response.success?
+      ending_time = (@reservation.job.duration / Variable.find_by_name("RESERVATION_FACTOR").value.to_f)*24*60*60
+      @reservation.update(status: "LIVE",ending_time: Time.now + ending_time.seconds)
+      redirect_to @reservation,notice: "Payment Successfull"
+    else
+      redirect_to @reservation,alert: "#{response.message}"
+    end
+  end
+  
   def index
     @reservations = Reservation.all
   end
@@ -28,7 +51,7 @@ class ReservationsController < ApplicationController
 
     respond_to do |format|
       if @reservation.save
-        format.html { redirect_to @reservation, notice: 'Reservation was successfully created.' }
+        format.html { redirect_to @reservation }
         format.json { render :show, status: :created, location: @reservation }
       else
         format.html { render :new }

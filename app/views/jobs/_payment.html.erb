@@ -1,0 +1,22 @@
+<div class="modal" id="jobpayment" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Payment for Job</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <center>
+            <p>You need to process payment before your Job goes live.</p>
+            <%= link_to image_tag("https://www.paypal.com/en_US/i/btn/btn_xpressCheckout.gif"), express_job_path %>
+        </center>
+      </div>
+      <!--<div class="modal-footer">-->
+      <!--  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>-->
+      <!--  <button type="button" class="btn btn-primary">Save changes</button>-->
+      <!--</div>-->
+    </div>
+  </div>
+</div>

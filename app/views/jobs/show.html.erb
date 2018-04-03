@@ -1,10 +1,11 @@
 <div class="container p-4">
 	<div class="featured-boxes featured-boxes-style-8">
+      <span class="badge badge-primary"><%= @job.status %> </span>  
     <div class="row">
 	    <div class="col-md-8">
 	      <div class="heading heading-primary heading-border heading-bottom-border">
           <h1><%= @job.title %></h1>
-        </div>
+        </div> 
         <div class="featured-box featured-box-primary featured-box-text-left grey-bg mb-0">
     			<div class="box-content">
     			  <h3 class="mb-0 text-capitalize">Description:</h3>
@@ -26,7 +27,14 @@
             <%= @job.deliverables %>
           </div>
         </div>
-        
+        <div class="featured-box featured-box-primary featured-box-text-left mt-0">
+          <% if user_signed_in? and current_user == @job.user and @job.status == "PENDING" %>
+            <center>
+                <p>You need to process payment before your Job goes live.</p>
+                <%= link_to image_tag("https://www.paypal.com/en_US/i/btn/btn_xpressCheckout.gif"), express_job_path %>
+            </center>
+          <% end %>
+        </div>
       </div>
       <div class="col-md-4">
         <div class="featured-box featured-box-primary featured-box-text-left mt-0">
@@ -64,62 +72,8 @@
             
             <!--< if user_signed_in? and current_user == @job.user %>-->
             
-              <div id="paypal-button-container"></div>
-              <script src="https://www.paypalobjects.com/api/checkout.js"></script>
-              <script>
-                  paypal.Button.render({
-          
-                      env: 'sandbox', // sandbox | production
-          
-                      // PayPal Client IDs - replace with your own
-                      // Create a PayPal app: https://developer.paypal.com/developer/applications/create
-                      client: {
-                          sandbox:    'AUGtdvwIyLdniSiPb0gaPf2AeFSyh1axyKx3vLxml0-2GAccXA8gY6piVVW8OwsSZjkILon7_5i3TRSe',
-                          production: '<insert production client id>'
-                      },
-          
-                      // Show the buyer a 'Pay Now' button in the checkout flow
-                      commit: true,
-          
-                      // payment() is called when the button is clicked
-                      payment: function(data, actions) {
-          
-                          // Make a call to the REST api to create the payment
-                          return actions.payment.create({
-                              payment: {
-                                  transactions: [
-                                      {
-                                          amount: { total: '<%= @job.amount %>', currency: 'USD' }
-                                      }
-                                  ]
-                              },
-                              experience: {
-                                  input_fields: {
-                                      no_shipping: 1
-                                  }
-                              }
-                          });
-                      },
-          
-                      // onAuthorize() is called when the buyer approves the payment
-                      onAuthorize: function(data, actions) {
-
-                      // Get the payment details
-
-                        return actions.payment.get().then(function(data) {
             
-                              // Execute the payment
-                              return actions.payment.execute().then(function() {
-                              });
-                          });
-                      
-                  }
-          
-                  }, '#paypal-button-container');
-          
-              </script>
             
-            <!--< end %>-->
              <!--if current user not in blocked users-->
               <% if user_signed_in? %>
                 <% if @blocked.include?  current_user.id %>
@@ -130,8 +84,6 @@
                     <%= form_for(@job.reservations.new) do |form| %>
                         <%= form.hidden_field :job_id, id: :reservation_job_id,value: @job.id %>
                         <%= form.hidden_field :user_id, id: :reservation_user_id,value: current_user.id %>
-                        <% ending_time = (@job.duration / Variable.find_by_name("RESERVATION_FACTOR").value.to_f)*24*60*60 %>
-                        <%= form.hidden_field :ending_time, id: :reservation_ending_time,value: (Time.now + ending_time.seconds) %>
                     
                       <div class="actions">
                         <%= form.submit "Make Reservation", class: "login loginmodal-button loginmodal-submit mt-1" %>

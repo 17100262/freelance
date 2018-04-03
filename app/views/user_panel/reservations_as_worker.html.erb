@@ -42,7 +42,7 @@
           <td><%= link_to reserv.job.title.truncate(100), job_path(reserv.job.slug) %></td>
           <td><%= reserv.job.amount %></td>
           <td><%= reserv.created_at %></td>
-          <td><%= link_to "View Details", reservations_path(reserv.slug), class:"btn btn-link btn-md" %></td>
+          <td><%= link_to "View Details", reservation_path(reserv.slug), class:"btn btn-link btn-md" %></td>
         </tr>
       <% end %>
     </tbody>

@@ -1,0 +1,36 @@
+
+<div class="container mt-lg">
+    <div class="card">
+        <center>
+        <h1>Payment Summary</h1>
+        <h2>You are making payment for this job</h2>
+        <% job = @reservation.job %>
+        <table class="table">
+            <tr>
+                <td>Title</td>
+                <td><%= job.title %></td>
+            </tr>
+            <tr>
+                <td>Amount</td>
+                <td>USD <%= job.amount %></td>
+            </tr>
+            <tr>
+                <td>Description</td>
+                <td><%= job.description %></td>
+            </tr>
+            <tr>
+                <td>Deliverables</td>
+                <td><%= job.deliverables %></td>
+            </tr>
+        </table>
+        <% if @express_token.present? %>
+            <% details =  EXPRESS_GATEWAY.details_for(@express_token) %>
+            <%= form_tag "/reservations/confirm_payment/#{@reservation.slug}" do %>
+                <%= hidden_field_tag :express_token,@express_token %>
+                <%= submit_tag "Confirm Payment", class: "btn btn-primary" %>
+            <% end %>
+        <% end %>
+        </center>
+        <br/>
+    </div>
+</div>

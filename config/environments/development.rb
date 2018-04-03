@@ -66,5 +66,18 @@ Rails.application.configure do
     :user_name => Rails.application.secrets['mailer_username'],
     :password => Rails.application.secrets['mailer_password'],
     :authentication => :plain
-    }  
+    }
+    
+    
+  config.after_initialize do
+    ActiveMerchant::Billing::Base.mode = :test
+    paypal_options = {
+      :login => "saqib.lums1-facilitator_api1.gmail.com",
+      :password => "YGTDCC2HP695QY3E",
+      :signature => "A41LmVKMoCeqtnyEzpq3qaWppplFAciqdH4aqkhZAHQHmpIaIG8FUpPm"
+    }
+    ::STANDARD_GATEWAY = ActiveMerchant::Billing::PaypalGateway.new(paypal_options)
+    ::EXPRESS_GATEWAY = ActiveMerchant::Billing::PaypalExpressGateway.new(paypal_options)
+  end
 end
+

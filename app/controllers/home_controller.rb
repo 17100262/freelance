@@ -3,7 +3,7 @@ class HomeController < ApplicationController
     def home
     end
     def jobs
-       @jobs = Job.where(status: "PENDING").order('created_at ASC')
+       @jobs = Job.where(status: "LIVE").order('created_at ASC')
     end
     
 end

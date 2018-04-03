@@ -64,3 +64,4 @@ gem "bootstrap_form"
 gem 'friendly_id', '~> 5.1.0'
 gem "paperclip", "~> 6.0.0"
 
+gem 'activemerchant'

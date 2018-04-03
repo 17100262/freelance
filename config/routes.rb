@@ -1,6 +1,14 @@
 Rails.application.routes.draw do
   resources :reservations
   resources :jobs,except: :index
+  get 'jobs/express/:id', to: 'jobs#express',as: :express_job
+  get 'jobs/payment/:id', to: 'jobs#payment',as: :payment_job
+  post 'jobs/confirm_payment/:id', to: 'jobs#confirm_payment',as: :confirm_payment_job
+  
+  get 'reservations/express/:id', to: 'reservations#express',as: :express_reservation
+  get 'reservations/payment/:id', to: 'reservations#payment',as: :payment_reservation
+  post 'reservations/confirm_payment/:id', to: 'reservations#confirm_payment',as: :confirm_payment_reservation
+
   resources :variables
   get 'user_panel',to: 'user_panel#index', as: :user_panel
   get 'jobs_as_employer',to: 'user_panel#jobs_as_employer', as: :user_empjobs

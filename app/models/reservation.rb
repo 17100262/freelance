@@ -19,6 +19,17 @@ class Reservation < ApplicationRecord
     self.job.update(status: "RESERVED")
   end
   
+  def purchase(token,ip)
+    response = EXPRESS_GATEWAY.purchase(self.job.amount_in_cents, express_purchase_options(token,ip))
+    response
+  end
+  def express_purchase_options(token,ip)
+    { 
+      :ip => ip,
+      :token => token,
+      :payer_id => EXPRESS_GATEWAY.details_for(token).payer_id
+    }
+  end
   
   
 end
