@@ -1,3 +1,4 @@
+require 'sidekiq/web'
 Rails.application.routes.draw do
   resources :reservations
   resources :jobs,except: :index
@@ -33,6 +34,10 @@ Rails.application.routes.draw do
       get :complete_sign_up
       post :completed_sign_up
     end
+  end
+  
+  authenticate :user do
+    mount Sidekiq::Web => '/sidekiq'
   end
   # , path: '/users/profile'
   get "*path", to: redirect('/404.html')

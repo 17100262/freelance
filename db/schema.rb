@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180403090629) do
+ActiveRecord::Schema.define(version: 20180416164512) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -50,7 +50,6 @@ ActiveRecord::Schema.define(version: 20180403090629) do
     t.text "deliverables"
     t.integer "duration"
     t.string "language"
-    t.integer "amount"
     t.boolean "online"
     t.text "address"
     t.bigint "user_id"
@@ -59,6 +58,7 @@ ActiveRecord::Schema.define(version: 20180403090629) do
     t.string "slug"
     t.string "express_token"
     t.string "express_payer_id"
+    t.float "amount"
     t.index ["slug"], name: "index_jobs_on_slug"
     t.index ["user_id"], name: "index_jobs_on_user_id"
   end
@@ -71,6 +71,13 @@ ActiveRecord::Schema.define(version: 20180403090629) do
     t.datetime "updated_at", null: false
     t.string "status", default: "PENDING"
     t.string "slug"
+    t.string "review"
+    t.integer "rating"
+    t.float "amount"
+    t.text "revision_description"
+    t.text "rejection_description"
+    t.datetime "paused_at"
+    t.text "pause_reason"
     t.index ["job_id"], name: "index_reservations_on_job_id"
     t.index ["slug"], name: "index_reservations_on_slug"
     t.index ["user_id"], name: "index_reservations_on_user_id"
@@ -111,6 +118,7 @@ ActiveRecord::Schema.define(version: 20180403090629) do
     t.integer "failed_attempts", default: 0, null: false
     t.string "unlock_token"
     t.datetime "locked_at"
+    t.float "balance", default: 0.0
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true

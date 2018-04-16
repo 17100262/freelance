@@ -116,3 +116,7 @@
 .container.jobs{
   max-width: 95% !important;
 }
+.fade.show {
+    background: rgba(0,0,0,0.5) !important;}
+.modal-backdrop.show  {
+    z-index: 0 !important;}

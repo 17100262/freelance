@@ -46,6 +46,7 @@ class DeviseCreateUsers < ActiveRecord::Migration[5.1]
       t.string :other_link3
       t.text :experience
       t.boolean :admin, default: false
+      t.float :balance,default: 0
 
       t.timestamps null: false
     end

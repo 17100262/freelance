@@ -7,7 +7,7 @@ class CreateJobs < ActiveRecord::Migration[5.1]
       t.text :deliverables
       t.integer :duration
       t.string :language
-      t.integer :amount
+      t.float :amount
       t.boolean :online
       t.text :address
       t.belongs_to :user, foreign_key: true

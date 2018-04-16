@@ -1,0 +1,23 @@
+<!-- Modal -->
+<div id="markRejected" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title"> Please leave a rating & review for this reservation</h4>
+        </div>
+        <div class="modal-body">
+            <%= bootstrap_form_for reservation,html: {id: "ordcmpltfrm"} do |f| %>
+            <%= f.text_area :rejection_description,required: true,placeholder: "Please explain why are you rejecting this reservation?" %>
+            <%= f.hidden_field :status,value: "REJECTED",id: "complete_status" %>
+        </div>
+        <div class="modal-footer">
+                <%= f.submit "Mark as Rejected", class:"login loginmodal-button loginmodal-submit completeButton" %>
+            <% end %>
+          <!--<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>-->
+        </div>
+    </div> <!-- modal-content div-->
+  </div>  <!-- modal-dialog div-->
+</div>  <!-- modal div-->

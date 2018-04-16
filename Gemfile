@@ -64,4 +64,8 @@ gem "bootstrap_form"
 gem 'friendly_id', '~> 5.1.0'
 gem "paperclip", "~> 6.0.0"
 
+gem 'sidekiq'
+gem 'redis', '~> 4.0', '>= 4.0.1'
+
+
 gem 'activemerchant'

@@ -4,7 +4,7 @@ class Reservation < ApplicationRecord
   extend FriendlyId
   friendly_id :generated_slug, use: :slugged
   
-  after_create_commit :update_job
+  # after_create_commit :update_job
   
   
   def generated_slug
@@ -16,7 +16,7 @@ class Reservation < ApplicationRecord
   end
   
   def update_job
-    self.job.update(status: "RESERVED")
+
   end
   
   def purchase(token,ip)

@@ -36,7 +36,7 @@ li {
 #header {
 	border-bottom:1px solid #ED8446;
 	position: relative;
-	z-index: 1030;
+	z-index: 1;
 }
 
 #header .header-body {
@@ -2263,7 +2263,6 @@ section.section.section-overlay-opacity:before {
 	left: 0;
 	position: absolute;
 	right: 0;
-	top: 0;
 	width: 100%;
 }
 

@@ -39,7 +39,55 @@
               <%= @reservation.job.description %>
             </p>
             
+            <% if @reservation.status == "REJECTED" %>
+              <p>
+                <strong>Rejection Reason:</strong>
+                <%= @reservation.rejection_description || "Not Provided" %>
+              </p>
+            <% end %>
+            
+            <% if @reservation.status == "PAUSED" %>
+              <p>
+                <strong>Pause Reason:</strong>
+                <%= @reservation.pause_reason || "Not Provided" %>
+              </p>
+              <p>
+                <strong>Paused at:</strong>
+                <%= @reservation.paused_at.strftime("%a, %b %d,%Y. %I:%M %p")   || "Not Provided" %>
+              </p>
+            <% end %>
+            
           </div>
+          <center>
+            <% if user_signed_in? and current_user.reservations_as_worker.exists?(id: @reservation.id) %>
+              <% if @reservation.status == "LIVE" or @reservation.status=="INREVISION" %>
+                <%= link_to "Deliver this project", reservation_path(@reservation,:reservation => {status: "DELIVERED"}),method: :put,class: "btn btn-sm btn-primary" %>
+              <% end %>
+            <% end %>
+            <% if user_signed_in? and current_user.admin and @reservation.status == "LIVE" %>
+              <%= link_to 'Pause this project', "#", data: {toggle: "modal", target: "#pause_project"},class: "btn btn-sm btn-primary" %>
+              <%= render "reservations/shared/pause_project", reservation: @reservation %>
+            <% end %> 
+            <% if user_signed_in? and current_user.admin and @reservation.status == "PAUSED" %>
+              <%= bootstrap_form_for @reservation do |f| %>
+                <%= f.hidden_field :ending_time,value: @reservation.ending_time + (Time.now - @reservation.paused_at) %>
+                <%= f.hidden_field :status,value: "LIVE",id: "complete_status" %>
+                <%= f.submit "Start this Project", class:"btn btn-sm btn-primary" %>
+              <% end %><br/>
+            <% end %>
+            <% if user_signed_in? and current_user.reservations_as_employer.exists?(id: @reservation.id) %>
+              <% if @reservation.status == "DELIVERED"  %>
+                <%= link_to 'Mark as Completed', "#", data: {toggle: "modal", target: "#markCompleted"},class: "btn btn-sm btn-primary" %>
+                <%= render "reservations/shared/markCompleted", reservation: @reservation %>
+                <%= link_to 'Ask for Revision', "#", data: {toggle: "modal", target: "#askRevision"},class: "btn btn-sm btn-primary" %>
+                <%= render "reservations/shared/askRevision", reservation: @reservation %>
+                <%= link_to 'Mark as Rejected', "#", data: {toggle: "modal", target: "#markRejected"},class: "btn btn-sm btn-primary" %>
+                <%= render "reservations/shared/markRejected", reservation: @reservation %>
+              <% end %>
+            <% end %>
+            
+            <%= link_to "Contact Customer Support", "#",class: "btn btn-sm btn-primary" %>
+          </center>
         </div>
       </div>
     </div>

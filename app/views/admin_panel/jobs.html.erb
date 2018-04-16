@@ -34,7 +34,8 @@
               <td><%= job.description.truncate(250) %></td>
               <td><%= job.amount %></td>
               <td><%= link_to "View Details", job_path(job.slug), class:"btn btn-link btn-md" %>
-              <% if job.status == "PENDING" %> | <%= link_to "Approve",job_path(job,:job => {status: "LIVE"}), method: :put, data: { confirm: 'Are you sure?' }, class:"btn btn-link btn-md" %> <% end %></td>
+              <% if job.status == "PENDING" %> | <%= link_to "Approve",job_path(job,:job => {status: "LIVE"}), method: :put, data: { confirm: 'Are you sure?' }, class:"btn btn-link btn-md" %> 
+                  | <%= link_to "Delete", job, method: :delete, data: { confirm: 'Are you sure?' } %> <% end %></td>
             </tr>
           <% end %>
         </tbody>

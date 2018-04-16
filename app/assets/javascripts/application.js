@@ -19,3 +19,12 @@
        $('.alert').delay(2000).fadeOut();
     });
 // });
+
+$(document).ready(function(){
+    
+    $('.rating').raty({
+      mouseover: function() {
+        return false;
+      }
+    });
+});

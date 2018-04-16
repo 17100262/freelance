@@ -1,0 +1,24 @@
+<!-- Modal -->
+<div id="askRevision" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title"> Why do you want to ask for Revision?</h4>
+        </div>
+        <div class="modal-body">
+            <%= bootstrap_form_for reservation do |f| %>
+                <%= f.text_area :revision_description,hide_label: true,required: true,placeholder: "Please explain to Mentor, Why do you want to ask for a revision?" %>
+                <%= f.hidden_field :status,value: "INREVISION" %>
+        </div>
+        <div class="modal-footer">
+                <%= f.submit "Ask for Revision", class:"login loginmodal-button loginmodal-submit" %>
+            <% end %>
+          
+        </div>
+    </div> <!-- modal-content div-->
+  </div>  <!-- modal-dialog div-->
+</div>  <!-- modal div-->
+
