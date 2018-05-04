@@ -1,13 +1,18 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
+  before_action :authenticate_user!
   before_action :configure_permitted_parameters, if: :devise_controller?
   
   def after_sign_in_path_for(resource)
-    stored_location_for(resource) ||
-      if resource.is_admin?
-        admin_panel_path
-      else
-        user_panel_path
+    if params[:redirect_to].present?
+      store_location_for(resource, params[:redirect_to])	
+    else
+      stored_location_for(resource) ||
+        if resource.is_admin?
+          admin_panel_path
+        else
+          user_panel_path
+        end
       end
   end
   

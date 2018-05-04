@@ -3,7 +3,7 @@
   <head>
     <title>Freelance</title>
     <%= csrf_meta_tags %>
-    <link href="https://use.fontawesome.com/releases/v5.0.7/css/all.css" rel="stylesheet">
+    <link href="https://use.fontawesome.com/releases/v5.0.9/css/all.css" rel="stylesheet">
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
     <script src="https://npmcdn.com/tether@1.2.4/dist/js/tether.min.js"></script>
@@ -21,14 +21,22 @@
             </div>
           <% end %>
           
-          <div class="container-fluid main" style="background: #f5f5f5; padding:0;">
-          <div role="main" class="main" style="min-height:82.5vh;">
+          <div class="container-fluid main" style="padding:0;">
+          <div role="main" class="main" style="min-height:80vh;">
 
           <%# unless params[:controller]=='home' && params[:action]=='admin' %>
           
           <%# end %> 
-            <% if user_signed_in? %>
-              <%= render ( ("layouts/admin_dash_nav" if current_user.is_admin?) || "layouts/user_dash_nav") %>
+            
+            <% if user_signed_in? and current_user.is_admin? %>
+              <% if controller_name=="home" || controller_name=="jobs" %>
+                <%= render "layouts/categories" %>
+              <% end %>
+            <% else %>
+             <%= render "layouts/categories" %>
+            <% end %>
+            <% if user_signed_in? and current_user.is_admin? %>
+              <%= render "layouts/admin_dash_nav" %>
             <% end %>
             <%= yield %>
           <%# unless params[:controller]=='home' && params[:action]=='admin' %>

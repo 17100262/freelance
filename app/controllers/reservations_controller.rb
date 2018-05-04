@@ -69,7 +69,7 @@ class ReservationsController < ApplicationController
     respond_to do |format|
       if @reservation.update(reservation_params)
         if params[:reservation][:status] == "LIVE"
-          TimerJob.set(wait_until: @reservation.ending_time).perform_later(@reservation,"LIVE")
+          # TimerJob.set(wait_until: @reservation.ending_time).perform_later(@reservation,"LIVE")
         elsif params[:reservation][:status] == "COMPLETED"
           @reservation.user.increment!(:balance,@reservation.amount)
         elsif params[:reservation][:status] == "REJECTED"
@@ -104,6 +104,6 @@ class ReservationsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def reservation_params
-      params.require(:reservation).permit(:user_id, :job_id, :status,:review,:rating,:amount,:ending_time,:slug,:revision_description,:rejection_description,:pause_reason,:paused_at)
+      params.require(:reservation).permit(:user_id, :job_id, :status,:review,:rating,:amount,:ending_time,:slug,:revision_description,:rejection_description,:pause_reason,:paused_at,:reviewed_at)
     end
 end

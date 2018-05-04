@@ -1,3 +1,13 @@
+GIT
+  remote: https://github.com/17100262/rails-realtime-chat-gem.git
+  revision: 35b48654d4b355417cf25b90d4b2ab40d4d0ab2f
+  specs:
+    chat_engine (0.1.0)
+      cancancan
+      paperclip
+      rails (>= 5.0)
+      toastr-rails
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -52,6 +62,7 @@ GEM
     bootstrap_form (2.7.0)
     builder (3.2.3)
     byebug (10.0.0)
+    cancancan (2.2.0)
     capybara (2.18.0)
       addressable
       mini_mime (>= 0.1.3)
@@ -235,6 +246,8 @@ GEM
     thor (0.20.0)
     thread_safe (0.3.6)
     tilt (2.0.8)
+    toastr-rails (1.0.3)
+      railties (>= 3.1.0)
     turbolinks (5.1.0)
       turbolinks-source (~> 5.1)
     turbolinks-source (5.1.0)
@@ -264,6 +277,7 @@ DEPENDENCIES
   bootstrap_form
   byebug
   capybara (~> 2.13)
+  chat_engine!
   coffee-rails (~> 4.2)
   devise
   figaro

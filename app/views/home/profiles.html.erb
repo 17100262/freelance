@@ -1,0 +1,72 @@
+<!--<= render "layouts/user_dash_nav" %>-->
+<div class="container-fluid">
+    <div class="container mt-lg mb-lg">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="profile-sidebar">
+                    <!-- SIDEBAR USERPIC -->
+                    <center>
+            			<span id="icon-span" data-toggle="modal" data-target="#updateavatar"></span>
+            				<div class="profile-userpic profile-container">
+                				<%# if @user.avatar.present? %>
+                                    <%#= image_tag @user.avatar.document, id:"profileImage", data: {toggle: "modal", target: "#updateavatar"} %>
+                                <%# else %>
+                                <%# end %>
+                                <a>
+                                    <img src="/avatar_generic.jpg" class="" id="profileImage" alt="User Profile Image" class="" data-toggle="modal" data-target="#updateavatar">
+                                </a>
+                                    
+                			</div>
+                            <%#= render "layouts/updateavatar", resource_name: @user,resource: User %>
+            		</center>
+        			<!-- END SIDEBAR USERPIC -->
+        			
+        			<!-- SIDEBAR USER TITLE -->
+        			<div class="profile-usertitle" style="margin:0;">
+        				<div class="profile-usertitle-name mt-lg">
+    						<%= (@user.name if @user.name.present? ) %>
+        				</div>
+                			<div class="table-responsive">
+                                <table class="table text-left">
+                                    <thead>
+                                    </thead>
+                                    <tbody>
+                                        <tr><td>Phone Number:</td><td><%= (@user.phone_number if @user.phone_number.present? ) || "Not Provided"  %></td></tr>
+                                        <tr><td>Identifier:</td><td><%= (@user.identifier if @user.identifier.present? ) || "Not Provided"  %></td></tr>
+                                        <tr><td>City:</td><td><%= (@user.company_name if @user.company_name.present? ) || "Not Provided" %></td></tr>
+                                        <tr><td>Country:</td><td><%= (@user.linkedin_link if @user.linkedin_link.present? ) || "Not Provided" %></td></tr>
+                                    </tbody>
+                                </table>
+                        <% if @user == current_user %>
+                            <div class="btn-group">
+                                <%= link_to 'Edit Profile',  edit_user_path, class:"btn btn-primary" %>
+                            </div>
+                        <% end %>
+                        </div>
+        			</div>
+        		</div>
+            </div>
+            <div class="col-md-9">
+                <div class="card card-profile">
+                <div class="table-responsive">
+                    <table class="table white-bg">
+                        <thead>
+                        </thead>
+                        <tbody>
+                            <tr><td>Portfolio:</td><td><%= (@user.portfolio if @user.portfolio.present? ) || "Not Provided"  %></td></tr>
+                            <tr><td>Undergrad Degree:</td><td><%= (@user.linkedin_link if @user.linkedin_link.present? ) || "Not Provided" %></td></tr>
+                            <tr><td>Undergrad University:</td><td><%= (@user.githhub_link if @user.githhub_link.present? ) || "Not Provided" %></td></tr>
+                            <tr><td>Underad Major:</td><td><%= (@user.website_link if @user.website_link.present? ) || "Not Provided" %></td></tr>
+                            <tr><td>Underad GPA:</td><td><%= (@user.other_link1 if @user.other_link1.present? ) || "Not Provided" %></td></tr>
+                            <tr><td>Masters Major:</td><td><%= (@user.other_link2 if @user.other_link2.present? ) || "Not Provided" %></td></tr>
+                            <tr><td>Masters University:</td><td><%= (@user.other_link3 if @user.other_link3.present? ) || "Not Provided" %></td></tr>
+                            <tr><td>Experience:</td><td><%= (simple_format(@user.experience) if @user.experience.present? ) || "Not Provided"  %></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

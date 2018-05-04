@@ -8,7 +8,7 @@ class UsersController < ApplicationController
     def update
         @user = User.find(params[:id])
         if @user.update(user_params)
-            redirect_to edit_user_path, notice: "User profile updated successfully"
+            redirect_to user_panel_path, notice: "User profile updated successfully"
         else
             redirect_to edit_user_path, notice: @user.errors.full_messages.join
         end

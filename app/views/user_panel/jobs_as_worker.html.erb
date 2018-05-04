@@ -4,17 +4,6 @@
           <h4>My Jobs as Worker</h4>
         </div>
       </div>
-      <hr class="solid tall m-0">
-      <div class="tabs tabs-bottom tabs-center tabs-simple">
-				<ul class="nav nav-tabs">
-          <%= ('<li class="nav-item active">'.html_safe if @status=="RESERVED" ) ||  '<li>'.html_safe %> <a class="nav-link" href="<%=user_workjobs_path(status: 'RESERVED')%>">RESERVED  <span class="badge badge-default badge-sm <%= ('badge-primary' if @count["RESERVED"].present?)%>"><%= @count["RESERVED"] || 0 %> </span> </a></li>
-          <%= ('<li class="nav-item active">'.html_safe if @status=="DELIVERED" ) ||  '<li>'.html_safe %> <a class="nav-link" href="<%=user_workjobs_path(status: 'DELIVERED')%>">DELIVERED  <span class="badge badge-default badge-sm <%= ('badge-primary' if @count["DELIVERED"].present?)%>"><%= @count["DELIVERED"] || 0%> </span></a></li>
-          <%= ('<li class="nav-item active">'.html_safe if @status=="COMPLETED" ) ||  '<li>'.html_safe %> <a class="nav-link" href="<%=user_workjobs_path(status: 'COMPLETED')%>">COMPLETED  <span class="badge badge-default badge-sm <%= ('badge-primary' if @count["COMPLETED"].present?)%>"><%= @count["COMPLETED"] || 0%> </span></a></li>
-          <%= ('<li class="nav-item active">'.html_safe if @status=="CANCELLED" ) ||  '<li>'.html_safe %> <a class="nav-link" href="<%=user_workjobs_path(status: 'CANCELLED')%>">CANCELLED  <span class="badge badge-default badge-sm <%= ('badge-primary' if @count["CANCELLED"].present?)%>"><%= @count["CANCELLED"] || 0%> </span></a></li>
-          <%= ('<li class="nav-item active">'.html_safe if @status=="INREVISION" ) ||  '<li>'.html_safe %> <a class="nav-link" href="<%=user_workjobs_path(status: 'INREVISION')%>">IN REVISION  <span class="badge badge-default badge-sm <%= ('badge-primary' if @count["INREVISION"].present?)%>"><%= @count["INREVISION"] || 0%> </span></a></li>
-          
-        </ul>
-      </div>
       
       <div class="panel-body">
         <div class="table-responsive">
@@ -35,7 +24,6 @@
               <td><%= job.description %></td>
               <td><%= job.amount %></td>
               <td><%= link_to "View Details", job_path(job.slug), class:"btn btn-link btn-md" %>
-              <% if job.status == "PENDING" %> | <%= link_to "Delete", job, method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-link btn-md" %> <% end %></td>
             </tr>
           <% end %>
         </tbody>

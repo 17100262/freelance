@@ -1,5 +1,6 @@
 require 'sidekiq/web'
 Rails.application.routes.draw do
+  resources :categories
   resources :reservations
   resources :jobs,except: :index
   get 'jobs/express/:id', to: 'jobs#express',as: :express_job
@@ -28,7 +29,7 @@ Rails.application.routes.draw do
   root 'home#home'
   get '/jobs',to: 'home#jobs',as: :livejobs
   get 'admin', to: 'home#admin', as: :admin
-  # get 'users/profile/edit', to: 'users#edit_profile', as: :edit_profile
+  get 'profiles/:id', to: 'home#profiles', as: :profiles
   resources :users do
     collection do
       get :complete_sign_up
@@ -39,6 +40,7 @@ Rails.application.routes.draw do
   authenticate :user do
     mount Sidekiq::Web => '/sidekiq'
   end
+  mount ChatEngine::Engine => "/messenger"
   # , path: '/users/profile'
   get "*path", to: redirect('/404.html')
 end

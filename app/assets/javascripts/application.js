@@ -13,11 +13,12 @@
 //= require rails-ujs
 //= require jquery
 //= require turbolinks
+//= require toastr
 //= require_tree .
 // $( document ).on('turbolinks:load', function() {
-    $(document).ready(function() {
-       $('.alert').delay(2000).fadeOut();
-    });
+    // $(document).ready(function() {
+    //   $('.alert').delay(2000).fadeOut();
+    // });
 // });
 
 $(document).ready(function(){
@@ -27,4 +28,27 @@ $(document).ready(function(){
         return false;
       }
     });
+});
+
+function avatarchange(){
+$("#profileImage").mouseover(function(){
+    $("#icon-span").show();
+    $("#profileImage").css('opacity','0.5');
+    $("#profileImage").css('background', 'rgba(0,0,0,0.5)');
+});
+
+$("#icon-span").mouseover(function(){
+    $("#icon-span").show();
+    $("#profileImage").css('opacity','0.5');
+    $("#profileImage").css('background', 'rgba(0,0,0,0.5)');
+});
+
+$("#profileImage").mouseout(function(){
+    $("#icon-span").hide();
+    $("#profileImage").css('opacity','1');
+    $("#profileImage").css('background', 'rgba(0,0,0,0)');
+});        
+}
+$(document).ready(function() {
+    avatarchange();
 });

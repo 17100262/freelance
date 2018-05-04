@@ -69,3 +69,5 @@ gem 'redis', '~> 4.0', '>= 4.0.1'
 
 
 gem 'activemerchant'
+
+gem "chat_engine", git: "https://github.com/17100262/rails-realtime-chat-gem.git"

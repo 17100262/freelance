@@ -17,9 +17,14 @@
   <div class="featured-boxes featured-boxes-style-8">
     <div class="row">
 	    <div class="col-lg-12">
-        <div class="featured-box featured-box-primary featured-box-text-left">
+        <div class="featured-box featured-box-primary featured-box-text-left pb-4">
     			<div class="box-content">
     			  <h2 class="text-center">Reservation Details</h2>
+    			  <% if current_user == @reservation.user and @reservation.status == "LIVE" and Time.now > @reservation.ending_time %>
+              <div class="alert alert-danger" role="alert">
+                This reservation is running late. Deliver Now to maintain you good performance record.
+              </div>
+            <% end %>
     			  <p>
               <strong>Status:</strong>
               <%= @reservation.status %>
@@ -60,6 +65,7 @@
           </div>
           <center>
             <% if user_signed_in? and current_user.reservations_as_worker.exists?(id: @reservation.id) %>
+              <%= link_to "Start Chat with Employer", chat_engine.chats_path({user_type: "User",user_id: @reservation.job.user.id }),method: :post,class: "btn btn-sm btn-primary" %>
               <% if @reservation.status == "LIVE" or @reservation.status=="INREVISION" %>
                 <%= link_to "Deliver this project", reservation_path(@reservation,:reservation => {status: "DELIVERED"}),method: :put,class: "btn btn-sm btn-primary" %>
               <% end %>
@@ -78,15 +84,12 @@
             <% if user_signed_in? and current_user.reservations_as_employer.exists?(id: @reservation.id) %>
               <% if @reservation.status == "DELIVERED"  %>
                 <%= link_to 'Mark as Completed', "#", data: {toggle: "modal", target: "#markCompleted"},class: "btn btn-sm btn-primary" %>
-                <%= render "reservations/shared/markCompleted", reservation: @reservation %>
                 <%= link_to 'Ask for Revision', "#", data: {toggle: "modal", target: "#askRevision"},class: "btn btn-sm btn-primary" %>
-                <%= render "reservations/shared/askRevision", reservation: @reservation %>
                 <%= link_to 'Mark as Rejected', "#", data: {toggle: "modal", target: "#markRejected"},class: "btn btn-sm btn-primary" %>
-                <%= render "reservations/shared/markRejected", reservation: @reservation %>
               <% end %>
             <% end %>
             
-            <%= link_to "Contact Customer Support", "#",class: "btn btn-sm btn-primary" %>
+            <%= link_to "Contact Customer Support", chat_engine.chats_path({user_type: "User",user_id: User.admins.first.id }),method: :post,class: "btn btn-sm btn-primary" %>
           </center>
         </div>
       </div>
@@ -101,9 +104,75 @@
         </center>
     </div>
   <% end %>
-</div>
-  
+  <% if @reservation.rating.present? %>
+        <div class="card mt-lg" style="background:#ededed; padding:10px">
+    			<div class="container-fliud">
+    				<div class="wrapper row">
+    		      <div class="col-md-12">
+    		        <h4 style="display:inline-block;">Reservation Review</h4>
+                
+    		      </div>
+    		    </div>
+    		  </div>
+    		</div> 
+  		
+  		<!--REVIEW BLOCK-->
+    <div class="card" style="background:#fff; padding:20px">
+  			<!--<div class="container">-->
+  				<div class="wrapper row">
+              <div class="col-md-2 col-sm-3 col-xs-3">
+                <%# if @reservation.user.avatar.present? %>
+                  <%#= image_tag @reservation.user.avatar.document.url(:small),style: "height: 70px;" %>
+                <%# else %>
+                  <img class="review-img" src="/avatar_generic.jpg" width="100%">
+                <%# end %>
+              </div>
+              <div class="col-md-10 col-sm-9 col-xs-9">
+                <div class="row">
+                  <div class="col-md-8">
+                    <h4 style="display:inline-block;"><%= @reservation.user.name %></h4>
+                  </div>  
 
+                  <div class="col-md-4">
+                    <span class="">
+			                <% if !@reservation.rating.present? %>
+                            No Rating
+                      <% else %>
+                        <span class="rating rating-disable" data-score="<%= @reservation.rating %>" ></span>
+                      
+                      <% end %>
+      						  </span>
+                  </div>
+                  
+                </div>
+                
+                <div class="row">
+                  <div class="col-md-12 text-muted">
+                    <%= time_ago_in_words(@reservation.reviewed_at) %> ago
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-12">
+                    <%= @reservation.review %>
+                  </div>
+                </div>
+                
+              </div> 
+          </div>
+        <!--</div>-->
+      </div>
+  <% end %>
+</div>
+
+
+
+
+
+  <% if @reservation.status == "DELIVERED" %>
+    <%= render "reservations/shared/markCompleted", reservation: @reservation %>
+    <%= render "reservations/shared/askRevision", reservation: @reservation %>
+    <%= render "reservations/shared/markRejected", reservation: @reservation %>
+  <% end %>
 </div>
 
 <% if @reservation.status == "LIVE" %>
@@ -126,15 +195,21 @@
     	// find the amount of "seconds" between now and target
     	var current_date = new Date().getTime();
     	var seconds_left = (target_date - current_date) / 1000;
-    
-    	days = pad( parseInt(seconds_left / 86400) );
-    	seconds_left = seconds_left % 86400;
-    		 
-    	hours = pad( parseInt(seconds_left / 3600) );
-    	seconds_left = seconds_left % 3600;
-    		  
-    	minutes = pad( parseInt(seconds_left / 60) );
-    	seconds = pad( parseInt( seconds_left % 60 ) );
+      if (seconds_left < 0 ){
+        days = 0
+        hours = 0
+        minutes = 0
+        seconds = 0
+      }else{
+      	days = pad( parseInt(seconds_left / 86400) );
+      	seconds_left = seconds_left % 86400;
+      		 
+      	hours = pad( parseInt(seconds_left / 3600) );
+      	seconds_left = seconds_left % 3600;
+      		  
+      	minutes = pad( parseInt(seconds_left / 60) );
+      	seconds = pad( parseInt( seconds_left % 60 ) );
+      }
     
     	// format countdown string + set tag value
     	countdown.innerHTML = "<span>" + days + "</span><span>" + hours + "</span><span>" + minutes + "</span><span>" + seconds + "</span>"; 

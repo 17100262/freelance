@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Chat engine</title>
+  <%= csrf_meta_tags %>
+  <%= action_cable_meta_tag %>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+  <%= stylesheet_link_tag    "chat_engine/application", media: "all" %>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://npmcdn.com/tether@1.2.4/dist/js/tether.min.js"></script>
+    <%#= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_include_tag "chat_engine/application" %>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css" integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg" crossorigin="anonymous">
+  
+</head>
+<body class="chat-application chat-application" data-col="content-left-sidebar">
+<div class="body">
+          <%= render 'layouts/header' unless params[:controller]=='home' && params[:action]=='admin' %>
+          <% if notice || alert %>
+            <div class="alert alert-info" role="alert">
+              <strong>Info!</strong> <%= notice || alert %>
+            </div>
+          <% end %>
+           <div class="container-fluid main" style="padding:0;">
+          <div role="main" class="main" style="min-height:80vh;">
+
+          <%# unless params[:controller]=='home' && params[:action]=='admin' %>
+          
+          <%# end %> 
+            
+            <% if user_signed_in? and current_user.is_admin? %>
+              <% if controller_name=="home" || controller_name=="jobs" %>
+                <%= render "layouts/categories" %>
+              <% end %>
+            <% else %>
+             <%= render "layouts/categories" %>
+            <% end %>
+            <% if user_signed_in? and current_user.is_admin? %>
+              <%= render "layouts/admin_dash_nav" %>
+            <% end %>
+              <%= yield %>
+
+            <% if user_signed_in? %>
+              <div id="user_div" data-user=<%= [current_user.class.to_s,current_user.id.to_s].join("_") %>></div>
+            <% end %>
+            <%# unless params[:controller]=='home' && params[:action]=='admin' %>
+                 
+          <%# end %>
+          </div>
+          </div>
+          <%= render 'layouts/footer' unless params[:controller]=='home' && params[:action]=='admin' %>
+      </div> 
+</body>
+</html>

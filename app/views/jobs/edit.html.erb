@@ -2,5 +2,19 @@
 
 <%= render 'form', job: @job %>
 
-<%= link_to 'Show', @job %> |
-<%= link_to 'Back', jobs_path %>
+<%= link_to 'Show', @job, class:"btn btn-primary" %> |
+<%= link_to 'Back', jobs_path, class:"btn btn-primary" %>
+
+
+
+<div class="container-fluid pt-5 pb-5" style="background:#F7F7F7">
+  <div class="row">
+  	    <div class="loginmodal-container loginmodal-container-edit">
+  			<div class="loginmodal-container-2">
+            <h3>Editing Job</h3>
+
+            <%= render 'form', job: @job %>
+        </div>    
+    </div>
+    </div>
+</div>

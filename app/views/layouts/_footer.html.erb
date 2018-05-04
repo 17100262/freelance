@@ -1,17 +1,17 @@
-<footer id="footer" class="color color-secondary">
+<footer id="footer" class="color color-primary">
     <div class="footer-copyright">
     	<div class="container">
     		<div class="row">
     			
     			<div class="col-lg-8">
-    				<p>Freelance © Copyright 2018. All Rights Reserved.</p>
+    				<p>Freelance © Copyright 2018. All Rights Reserved. Developed by <a href="http://www.systemplus.com.pk/" target="_blank">System Plus</a></p>
     			</div>
     			<div class="col-lg-4">
     				<nav id="sub-menu">
     					<ul>
     						<li><a href="#">FAQ's</a></li>
     						<li><a href="#">Sitemap</a></li>
-    						<li><a href="#">Contact</a></li>
+    						<li><%= link_to "Contact Customer Support", chat_engine.chats_path({user_type: "User",user_id: User.admins.first.id }),method: :post %></li>
     					</ul>
     				</nav>
     			</div>

@@ -3,6 +3,7 @@ class Job < ApplicationRecord
   friendly_id :title, use: :slugged
   
   belongs_to :user
+  belongs_to :category
   has_many :blocked_users,dependent: :destroy
   has_many :blocked_people, :through => :blocked_users, :source => :user
   

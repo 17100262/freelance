@@ -17,27 +17,27 @@
         <li>
             <% ujam = current_user.jobs_as_employer.where(status: "PENDING").count %>
             <% if controller_name=="user_panel" and action_name=="jobs_as_employer" %>
-                <a class="active" href="/jobs_as_employer">Jobs as employer <% if ujam > 0 %> <span class="badge badge-danger"><%=  ujam %> </span> <% end %> </a>
+                <a class="active" href="/jobs_as_employer">Jobs as employer <% if ujam > 0 %> <span class="badge badge-primary"><%=  ujam %> </span> <% end %> </a>
             <% else %>
-                <a href="/jobs_as_employer">Jobs as employer <% if ujam > 0 %> <span class="badge badge-danger"><%= ujam %> </span> <% end %></a>
+                <a href="/jobs_as_employer">Jobs as employer <% if ujam > 0 %> <span class="badge badge-primary"><%= ujam %> </span> <% end %></a>
             <% end %>
         </li>
             
             <% ujaw = current_user.jobs_as_worker.where(status: "RESERVED").count %>
         <li>
             <% if controller_name=="user_panel" and action_name=="jobs_as_worker" %>
-                <a class="active" href="/jobs_as_worker">Jobs as worker <% if ujaw > 0 %> <span class="badge badge-danger"><%=  ujaw %> </span><% end %></a>
+                <a class="active" href="/jobs_as_worker">Jobs as worker <% if ujaw > 0 %> <span class="badge badge-primary"><%=  ujaw %> </span><% end %></a>
             <% else %>
-                <a href="/jobs_as_worker">Jobs as worker <% if ujaw > 0 %> <span class="badge badge-danger"><%= ujaw %> </span><% end %></a>
+                <a href="/jobs_as_worker">Jobs as worker <% if ujaw > 0 %> <span class="badge badge-primary"><%= ujaw %> </span><% end %></a>
             <% end %>
         </li>
         
         <% urae = current_user.reservations_as_employer.where(status: "PENDING").count %>
         <li>
             <% if controller_name=="user_panel" and action_name=="reservations_as_employer" %>
-                <a class="active" href="/reservations_as_employer">Reservations as Employer <% if urae > 0 %>  <span class="badge badge-danger"><%=  urae %> </span><% end %></a>
+                <a class="active" href="/reservations_as_employer">Reservations as Employer <% if urae > 0 %>  <span class="badge badge-primary"><%=  urae %> </span><% end %></a>
             <% else %>
-                <a href="/reservations_as_employer">Reservations as Employer <% if urae > 0 %>  <span class="badge badge-danger"><%= urae %> </span><% end %></a>
+                <a href="/reservations_as_employer">Reservations as Employer <% if urae > 0 %>  <span class="badge badge-primary"><%= urae %> </span><% end %></a>
             <% end %>
         </li>
         
@@ -45,9 +45,9 @@
         <% uraw = current_user.reservations_as_worker.where(status: "PENDING").count %>
         <li>
             <% if controller_name=="user_panel" and action_name=="reservations_as_worker" %>
-                <a class="active" href="/reservations_as_worker">Reservations as Worker <% if uraw > 0 %>  <span class="badge badge-danger"><%=  uraw %> </span><% end %></a>
+                <a class="active" href="/reservations_as_worker">Reservations as Worker <% if uraw > 0 %>  <span class="badge badge-primary"><%=  uraw %> </span><% end %></a>
             <% else %>
-                <a href="/reservations_as_worker">Reservations as Worker <% if uraw > 0  %> <span class="badge badge-danger"><%= uraw %> </span><% end %></a>
+                <a href="/reservations_as_worker">Reservations as Worker <% if uraw > 0  %> <span class="badge badge-primary"><%= uraw %> </span><% end %></a>
             <% end %>
         </li>
     </ul>

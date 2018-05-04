@@ -47,6 +47,8 @@ class DeviseCreateUsers < ActiveRecord::Migration[5.1]
       t.text :experience
       t.boolean :admin, default: false
       t.float :balance,default: 0
+      t.attachment :avatar
+      t.string :slug,unique: true
 
       t.timestamps null: false
     end

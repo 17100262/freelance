@@ -10,7 +10,7 @@
         </div>
         <div class="modal-body">
             <%= bootstrap_form_for reservation do |f| %>
-                <%= f.text_area :revision_description,hide_label: true,required: true,placeholder: "Please explain to Mentor, Why do you want to ask for a revision?" %>
+                <%= f.text_area :revision_description,hide_label: true,required: true,placeholder: "Please explain to worker, Why do you want to ask for a revision?" %>
                 <%= f.hidden_field :status,value: "INREVISION" %>
         </div>
         <div class="modal-footer">

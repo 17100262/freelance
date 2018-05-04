@@ -1,0 +1,43 @@
+<div class="container">
+  
+  <%= bootstrap_form_for(Category.new) do |form| %>
+    <div class="row">
+      <div class="col-md-3">
+        <div class="field">
+          <%= form.text_field :name,placeholder:"name", id: :category_name %>
+        </div>
+      </div>
+      <div class="col-md-9">
+        <div class="actions">
+          <%= form.submit %>
+        </div>
+      </div>
+    </div>
+  
+  <% end %>
+
+
+  <h1>All Categories</h1>
+
+  <table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th colspan="2"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @categories.each do |category| %>
+      <tr>
+        <td><%= category.name %></td>
+        <td><%= link_to 'Edit', edit_category_path(category) %></td>
+        <td><%= link_to 'Destroy', category, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+
+
+</div>

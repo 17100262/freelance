@@ -10,7 +10,12 @@
       </ul>
     </div>
   <% end %>
-
+  
+  <div class="field">
+    <%= form.label "Category *" %>
+    <%= form.select :category_id,Category.all.collect{|c| [c.name , c.id]},{prompt:'Please Select Category', hide_label: true},{id: "job_category_id_web", autofocus: true, required: true}  %>
+  </div>
+  
   <div class="field">
     <%= form.label "Title *" %>
     <%= form.text_field :title, id: :job_title,hide_label: true,required: true %>
@@ -54,7 +59,7 @@
   </div>
 
   <div class="actions">
-    <%= form.submit "Submit" %>
+    <%= form.submit "Submit", class: "btn btn-primary" %>
   </div>
 <% end %>
 

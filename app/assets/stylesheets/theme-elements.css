@@ -2023,7 +2023,7 @@ ul.sitemap.list ul {
 
 /* Bottom Tabs */
 .tabs.tabs-bottom {
-	margin: 0 0 20px 0;
+	margin: 0 0 0px 0;
 	padding: 0;
 }
 
@@ -2333,7 +2333,6 @@ ul.sitemap.list ul {
 
 /* Simple */
 .tabs.tabs-simple .nav-tabs {
-	justify-content: center;
 	border: 0;
 	margin-bottom: 10px;
 }
@@ -8773,4 +8772,7 @@ ul.history li .featured-box .box-content {
 /* Google Map */
 .google-map-footer {
 	margin: 35px 0 -50px !important;
+}
+.color-white{
+	color: #fff !important;
 }

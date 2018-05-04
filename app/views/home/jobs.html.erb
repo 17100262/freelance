@@ -1,38 +1,39 @@
 <div class="container">
-    <div class="featured-boxes featured-boxes-style-8">
-    	<div class="row">
-    	    <% @jobs.each do |job| %>
-    		<div class="col-lg-4">
-    		    <div class="featured-box featured-box-primary featured-box-text-left primary-bg mb-0">
-    			  <div class="box-content py-1">
-    			     <h4 class="mb-0 text-capitalize title-height"><%= link_to job.title.truncate(60),job_path(job.slug) %></h4>
-                  </div>
-                </div>
-    			<div class="featured-box featured-box-primary featured-box-text-left mt-0">
-    				<div class="box-content">
-    					<div class="row des-height">
-    						<div class="col">
-    							<p><%= job.description.truncate(120) %></p>
-    						</div>
-    					</div>
-    					<div class="row font-weight-bold bottom">
-    						<div class="col-6">
-    							<p class="mb-1"><%= job.duration %> Days</p>
-    						</div>
-    						<div class="col-6 text-right">
-    							<a href="#" class="no-link">$ <%= job.amount  %></a>
-    						</div>
-    					</div>
-    					<hr class="m-0 solid tall"/>
-    					<div class="row">
-    						<div class="col">
-    							<h4 class="mt-2"><%= job.user.email %></h4>
-    						</div>
-    					</div>
-    				</div>
-    			</div>
-    		</div>
-    		<% end %>
-    	</div>
+  <div class="row mt-4">
+    <div class="col-lg-10">
+      <% if @status == "alljobs" %>
+        <h3>All Jobs</h3>
+      <% else %>
+        <h3><%= @status %> Jobs</h3>
+      <% end %>
     </div>
-</div>    
+  </div>
+  <% @jobs.each do |job| %>
+    <div class="card mb-3 p-3 clickable" id="clickablediv<%=job.id%>">
+  		<div class="row">
+        <div class="col-md-12">
+          <div class="job-text">
+              <h4 title="<%= job.title %>"><%= link_to job.title.truncate(95),job_path(job.slug) %></h4>
+              <div class="mb-2"><span class="text-muted job-info"> - Duration: <%= job.duration %> Days - Budget: $<%= job.amount  %> - Posted <%= time_ago_in_words(job.created_at) %> ago</span></div>
+              <div class="mb-2"><%= job.description.truncate(400) %></div>
+              <div class="job-detail"><%= job.category.name %></div>
+              <%#<div class="mt-2"><strong>About Client &nbsp;&nbsp; </strong><span class="rating rating<%= job.id >"></span></div>%>
+          </div>    
+		    </div>
+      </div> 
+    </div>
+   
+<% end %>
+</div>
+
+<script>
+$( document ).ready(function() {
+    <% @jobs.each do |job| %>
+        $("#clickablediv<%=job.id%>").click(function(){
+             window.location=$(this).find("a").attr("href");
+             return false;
+        });
+    <% end %>
+});
+
+</script>

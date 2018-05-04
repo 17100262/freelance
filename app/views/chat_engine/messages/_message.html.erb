@@ -1,0 +1,20 @@
+
+   
+    <div class="chat-avatar media-left pr-1">
+        <span class="avatar avatar-md avatar-online"><img class="media-object rounded-circle" src="/avatar.png" alt="<%#= message.sender.fullname %>">
+        
+        </span>
+    
+    </div>
+    
+    <div class="chat-body">
+      <div class="chat-content">
+        <p class="color-white"><%= message.content %></p>
+        <% if (message.document.exists?) %>
+        <p class="down-icon color-white"><%= link_to "#{message.document_file_name}",message.document.url, class:"color-white" %></p>
+        <% end %>
+       <small class="font-small-3 primary"><%= time_ago_in_words(message.created_at) %> ago</small></h6>  
+
+      </div>
+    
+    </div>

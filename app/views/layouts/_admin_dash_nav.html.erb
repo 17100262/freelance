@@ -8,6 +8,13 @@
             <% end %>
         </li>
         <li>
+            <% if controller_name=="chat_engine" and action_name=="index" %>
+                <a class="active" href="/messenger/inbox">Inbox</a>
+            <% else %>
+                <a href="/messenger/inbox">Inbox</a>
+            <% end %>
+        </li>
+        <li>
             <% if controller_name=="admin_panel" and action_name=="payments" %>
                 <a class="active" href="/admin_panel/payments">Payments</a>
             <% else %>
@@ -16,17 +23,17 @@
         </li>
         <li>
             <% if controller_name=="admin_panel" and action_name=="jobs" %>
-                <a class="active" href="/admin_panel/jobs">Jobs <span class="badge badge-danger"><%= Job.where(status: "PENDING").count || 0 %> </span></a>
+                <a class="active" href="/admin_panel/jobs">Jobs </a>
             <% else %>
-                <a href="/admin_panel/jobs">Jobs <span class="badge badge-danger"><%= Job.where(status: "PENDING").count || 0 %> </span></a>
+                <a href="/admin_panel/jobs">Jobs</a>
             <% end %>
         </li>
         
         <li>
             <% if controller_name=="admin_panel" and action_name=="reservations" %>
-                <a class="active" href="/admin_panel/reservations">Reservations <span class="badge badge-danger"><%= Reservation.where(status: "PENDING").count || 0 %> </span></a>
+                <a class="active" href="/admin_panel/reservations">Reservations</a>
             <% else %>
-                <a href="/admin_panel/reservations">Reservations <span class="badge badge-danger"><%= Reservation.where(status: "PENDING").count || 0 %> </span></a>
+                <a href="/admin_panel/reservations">Reservations </a>
             <% end %>
         </li>
         
@@ -37,6 +44,10 @@
                 <a href="/variables">Variables</a>
             <% end %>
         </li>
-        
+        <li class="float-right">
+            <% if user_signed_in? and current_user.admin %>
+      			<a href="<%= main_app.destroy_user_session_path %>" data-method="delete">Log Out</a>
+      		<% end %>
+        </li>
     </ul>
 </div>

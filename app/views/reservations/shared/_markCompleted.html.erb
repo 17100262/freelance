@@ -5,16 +5,19 @@
     <!-- Modal content-->
     <div class="modal-content">
         <div class="modal-header">
+          <center><h4 class="modal-title"> Rating & Review </h4></center>
           <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title"> Please leave a rating & review for this reservation</h4>
         </div>
         <div class="modal-body">
+            <p class="mb-1">Please leave a rating & review for this reservation</p>
             <%= bootstrap_form_for reservation,html: {id: "ordcmpltfrm"} do |f| %>
+            <%= f.text_field :rating,required: true,value: nil, id: "rating_field",hide_label: true %>
+              Rating: <div id="rating" class="text-center"></div>
+                <%= f.hidden_field :status,value: "COMPLETED",id: "complete_status" %>
+                <%= f.hidden_field :reviewed_at,value: Time.now,id: "complete_reviewed_at" %>
             <%= f.text_area :review,required: true,placeholder: "Please leave a review for this reservation" %>
-              Rating: <div id="rating"><%= f.text_field :rating,required: true, id: "rating_field",hide_label: true,style: "display:none;" %></div>
             
                 
-                <%= f.hidden_field :status,value: "COMPLETED",id: "complete_status" %>
         </div>
         <div class="modal-footer">
                 <%= f.submit "Mark as Completed", class:"login loginmodal-button loginmodal-submit completeButton" %>

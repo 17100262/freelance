@@ -94,7 +94,7 @@ border-radius: 3px;
   border:0 !important;
   color: #fff !important;
   font-weight:bold;
-  background: linear-gradient(to right, rgb(239,85,34) , rgb(239,85,60)) !important;
+  background: #7A59A0 !important;
 }
 
 
@@ -112,7 +112,7 @@ border-radius: 3px;
   border:0 !important;
   color: #fff !important;
   font-weight:bold;
-  background: linear-gradient(to right, rgb(239,85,34) , rgb(239,85,60)) !important;
+  background: #7A59A0 !important;
 }
 .loginmodal-social{
   border:0;

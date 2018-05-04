@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180416164512) do
+ActiveRecord::Schema.define(version: 20180502080836) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -29,6 +29,41 @@ ActiveRecord::Schema.define(version: 20180416164512) do
     t.bigint "user_id"
     t.index ["job_id"], name: "index_blocked_users_on_job_id"
     t.index ["user_id"], name: "index_blocked_users_on_user_id"
+  end
+
+  create_table "categories", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "chat_engine_chat_subscribers", force: :cascade do |t|
+    t.string "subscriber_type"
+    t.bigint "subscriber_id"
+    t.integer "chat_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "chat_engine_chats", force: :cascade do |t|
+    t.string "slug"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "chat_engine_messages", force: :cascade do |t|
+    t.string "sender_type"
+    t.bigint "sender_id"
+    t.text "content"
+    t.integer "chat_id"
+    t.boolean "read", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "document_file_name"
+    t.string "document_content_type"
+    t.integer "document_file_size"
+    t.datetime "document_updated_at"
+    t.index ["sender_type", "sender_id"], name: "index_chat_engine_messages_on_sender_type_and_sender_id"
   end
 
   create_table "friendly_id_slugs", force: :cascade do |t|
@@ -50,34 +85,37 @@ ActiveRecord::Schema.define(version: 20180416164512) do
     t.text "deliverables"
     t.integer "duration"
     t.string "language"
+    t.float "amount"
     t.boolean "online"
     t.text "address"
     t.bigint "user_id"
+    t.bigint "category_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "slug"
     t.string "express_token"
     t.string "express_payer_id"
-    t.float "amount"
+    t.index ["category_id"], name: "index_jobs_on_category_id"
     t.index ["slug"], name: "index_jobs_on_slug"
     t.index ["user_id"], name: "index_jobs_on_user_id"
   end
 
   create_table "reservations", force: :cascade do |t|
+    t.string "status", default: "PENDING"
     t.bigint "user_id"
     t.bigint "job_id"
     t.datetime "ending_time"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string "status", default: "PENDING"
-    t.string "slug"
+    t.datetime "reviewed_at"
+    t.float "amount"
     t.string "review"
     t.integer "rating"
-    t.float "amount"
     t.text "revision_description"
     t.text "rejection_description"
-    t.datetime "paused_at"
     t.text "pause_reason"
+    t.datetime "paused_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "slug"
     t.index ["job_id"], name: "index_reservations_on_job_id"
     t.index ["slug"], name: "index_reservations_on_slug"
     t.index ["user_id"], name: "index_reservations_on_user_id"
@@ -108,6 +146,12 @@ ActiveRecord::Schema.define(version: 20180416164512) do
     t.string "other_link3"
     t.text "experience"
     t.boolean "admin", default: false
+    t.float "balance", default: 0.0
+    t.string "avatar_file_name"
+    t.string "avatar_content_type"
+    t.integer "avatar_file_size"
+    t.datetime "avatar_updated_at"
+    t.string "slug"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "provider"
@@ -118,7 +162,7 @@ ActiveRecord::Schema.define(version: 20180416164512) do
     t.integer "failed_attempts", default: 0, null: false
     t.string "unlock_token"
     t.datetime "locked_at"
-    t.float "balance", default: 0.0
+    t.boolean "online", default: false
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
@@ -128,13 +172,14 @@ ActiveRecord::Schema.define(version: 20180416164512) do
   create_table "variables", force: :cascade do |t|
     t.string "name"
     t.integer "value"
+    t.string "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "description"
   end
 
   add_foreign_key "blocked_users", "jobs"
   add_foreign_key "blocked_users", "users"
+  add_foreign_key "jobs", "categories"
   add_foreign_key "jobs", "users"
   add_foreign_key "reservations", "jobs"
   add_foreign_key "reservations", "users"
