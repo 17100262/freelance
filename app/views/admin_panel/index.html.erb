@@ -28,91 +28,151 @@
     		</div>
         </div>
         <div class="col-md-9">
-            <section class="blocks">
-                <div class="row mb-4">
-                    <div class="col-6 col-sm-4">
+                <div class="row">
+                    <div class="col-md-12 jumbotron py-2">
+                        <h3 style="margin: 0">Overall Statistics</h3>
+                    </div>
+                </div>
+                
+               <section class="blocks">
+                    <div class="row mb-4">
+                       <div class="col-6 col-sm-3">
                         <div class="card">
                             <div class="card-body clickable" id="clickablediv1">
                                 <center>
-                                    <h5><a class="nocolor" href="<%=admin_jobs_path%>">Total Jobs</a></h5>
-                                    <h2><%=Job.count%></h2>
+                                     <h5><%= link_to "Users", admin_users_path,class: "nocolor"  %></h5>
+                                        <h2><%= User.count %></h2>
                                 </center>
                             </div>
                         </div>
                     </div>
-                    
-                    <div class="col-6 col-sm-4">
+                    <div class="col-6 col-sm-3">
                         <div class="card">
                             <div class="card-body clickable" id="clickablediv2">
                                 <center>
-                                    <h5><a class="nocolor" href="<%=admin_reservations_path%>">Total Reservations</a></h5>
-                                    <h2><%=Reservation.count%></h2>
+                                     <h5><%= link_to "Jobs", admin_jobs_path,class: "nocolor"  %></h5>
+                                        <h2><%= Job.count %></h2>
                                 </center>
                             </div>
                         </div>
                     </div>
-                    
-                    <!--<div class="col-6 col-sm-4">-->
-                    <!--    <div class="card">-->
-                    <!--        <div class="card-body clickable" id="clickablediv3">-->
-                    <!--            <center>-->
-                    <!--                <h5><a class="nocolor" href="/messenger/inbox">Unread Messages</a></h5>-->
-                    <!--                <h2>0</h2>-->
-                    <!--            </center>-->
-                    <!--        </div>-->
-                    <!--    </div>-->
-                    <!--</div>-->
-               </div>
-            </section>
-            <section class="todos">
-                <div class="tabs tabs-bottom tabs-center tabs-simple tabs-link">
-                    <ul class="nav nav-tabs nav nav-tabs link-tabs">
-                      <li>
-                          <a data-toggle="tab" href="#todos" class="nocolor active">TO DO's</a>
-                      </li>
-                      <li>
-                          <a data-toggle="tab" class="nocolor" href="#notify">NOTIFCATIONS</a>
-                      </li>
-                    </ul>
-                </div>
-                <div class="card">
-                    <div class="tab-content">
-                        <div id="todos" class="tab-pane fade in active show">
-                            <div class="">
-                        <table class="table table-responsive todo">
-                              <thead>
-                              </thead>
-                              <tbody>
-                                    <tr>
-                                        <td>No Required Action Right Now.</td>
-                                    </tr>
-                              </tbody>
-                            </table>
-                        </div>
-                        </div>
-                        <div id="notify" class="tab-pane fade">
-                            <div class="">
-                            <table class="table table-responsive todo">
-                              <thead>
-                    
-                              </thead>
-                              <tbody>
-                                    <tr>
-                                        <td>No New Notifications. All Caught Up.</td>
-                                    </tr>
-                              </tbody>
-                            </table>
+                    <div class="col-6 col-sm-3">
+                        <div class="card">
+                            <div class="card-body clickable" id="clickablediv3">
+                                <center>
+                                     <h5><%= link_to "Reservations", admin_reservations_path,class: "nocolor"  %></h5>
+                                        <h2><%= Reservation.count %></h2>
+                                </center>
                             </div>
                         </div>
                     </div>
+                        
+                   </div>
+                </section>
+                <div class="row">
+                    <div class="col-md-12 jumbotron py-2">
+                        <h3 style="margin: 0">Reservations</h3>
+                    </div>
                 </div>
-            </section>
-        </div>
+                <section class="blocks">
+                    <div class="row">
+                        <div class="col-xs-6 col-sm-3">
+                             <div class="card">
+                            <div class="card-body clickable" id="clickablediv4">
+                                <center>
+                                     <h5><%= link_to "Pending",admin_reservations_path(status: 'PENDING'),class: "nocolor"  %></h5>
+                                        <h2><%= @res_count["PENDING"] || 0  %></h2>
+                                </center>
+                            </div>
+                        </div>
+                        </div>
+                        
+                        
+                        <div class="col-xs-6 col-sm-3">
+                            <div class="card">
+                            <div class="card-body clickable" id="clickablediv5">
+                                <center>
+                                     <h5><%= link_to "Live",admin_reservations_path(status: 'LIVE'),class: "nocolor"  %></h5>
+                                        <h2><%= @res_count["LIVE"] || 0  %></h2>
+                                </center>
+                            </div>
+                         </div>
+                        </div>
+                        <div class="col-xs-6 col-sm-3">
+                            <div class="card">
+                            <div class="card-body clickable" id="clickablediv6">
+                                <center>
+                                     <h5><%= link_to "Paused",admin_reservations_path(status: 'PAUSED'),class: "nocolor"  %></h5>
+                                        <h2><%= @res_count["PAUSED"] || 0  %></h2>
+                                </center>
+                            </div>
+                         </div>
+                        </div>
+                        
+                        <div class="col-xs-6 col-sm-3">
+                            <div class="card">
+                            <div class="card-body clickable" id="clickablediv7">
+                                <center>
+                                     <h5><%= link_to "Delivered",admin_reservations_path(status: 'DELIVERED'),class: "nocolor"  %></h5>
+                                        <h2><%= @res_count["DELIVERED"] || 0  %></h2>
+                                </center>
+                            </div>
+                         </div>
+                        </div>
+                       </div>
+                       <div class="row mt-4">    
+                        <div class="col-xs-6 col-sm-3">
+                            <div class="card">
+                            <div class="card-body clickable" id="clickablediv8">
+                                <center>
+                                     <h5><%= link_to "Completed",admin_reservations_path(status: 'COMPLETED'),class: "nocolor"  %></h5>
+                                        <h2><%= @res_count["COMPLETED"] || 0  %></h2>
+                                </center>
+                            </div>
+                         </div>
+                        </div>
+                        
+                        <div class="col-xs-6 col-sm-3">
+                            <div class="card">
+                            <div class="card-body clickable" id="clickablediv9">
+                                <center>
+                                     <h5><%= link_to "Cancelled",admin_reservations_path(status: 'CANCELLED'),class: "nocolor"  %></h5>
+                                        <h2><%= @res_count["CANCELLED"] || 0  %></h2>
+                                </center>
+                            </div>
+                         </div>
+                        </div>
+                        
+                        <div class="col-xs-6 col-sm-3">
+                            <div class="card">
+                            <div class="card-body clickable" id="clickablediv10">
+                                <center>
+                                     <h5><%= link_to "InRevision",admin_reservations_path(status: 'INREVISION'),class: "nocolor"  %></h5>
+                                        <h2><%= @res_count["INREVISION"] || 0  %></h2>
+                                </center>
+                            </div>
+                         </div>
+                        </div>
+                        
+                        <div class="col-xs-6 col-sm-3">
+                            <div class="card">
+                            <div class="card-body clickable" id="clickablediv11">
+                                <center>
+                                     <h5><%= link_to "Rejected",admin_reservations_path(status: 'REJECTED'),class: "nocolor"  %></h5>
+                                        <h2><%= @res_count["REJECTED"] || 0  %></h2>
+                                </center>
+                            </div>
+                         </div>
+                        </div>
+                        
+                   </div>
+                </section>
+            </div>
     </div>
 </div>
 <script>
 $( document ).ready(function() {
-    <% for i in (1..3) %>
+    <% for i in (1..20) %>
         $("#clickablediv<%=i%>").click(function(){
              window.location=$(this).find("a").attr("href");
              return false;

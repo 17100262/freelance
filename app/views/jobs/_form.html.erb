@@ -12,47 +12,57 @@
   <% end %>
   
   <div class="field">
-    <%= form.label "Category *" %>
+    <%= form.label "Category*" %>
     <%= form.select :category_id,Category.all.collect{|c| [c.name , c.id]},{prompt:'Please Select Category', hide_label: true},{id: "job_category_id_web", autofocus: true, required: true}  %>
   </div>
   
   <div class="field">
-    <%= form.label "Title *" %>
+    <%= form.label "SubCategory*" %>
+    <%= form.select :subcategory_id, {},{prompt:'Please Select SubCategory', hide_label: true},{id: "job_subcategory_id_web", autofocus: true, required: true}  %>
+  </div>
+  
+  <div class="field">
+    <%= form.label "Title*" %>
     <%= form.text_field :title, id: :job_title,hide_label: true,required: true %>
   </div>
 
   <div class="field">
-    <%= form.label "Description *" %>
+    <%= form.label "Description*" %>
     <%= form.text_area :description, id: :job_description,hide_label: true,required: true %>
   </div>
 
   <div class="field">
-    <%= form.label "Deliverables *" %>
+    <%= form.label "Deliverables*" %>
     <%= form.text_area :deliverables, id: :job_deliverables,hide_label: true,required: true %>
   </div>
 
   <div class="field">
-    <%= form.number_field :duration, id: :job_duration,label: "Duration in Days *",required: true %>
+    <%= form.number_field :duration,min: Variable.find_by_name("MIN_DURATION").value,max: Variable.find_by_name("MAX_DURATION").value, id: :job_duration,label: "Duration in Days *",required: true %>
   </div>
 
   <div class="field">
-    <%= form.label "Language *" %>
+    <%= form.label "Language*" %>
     <%= form.text_field :language, id: :job_language,hide_label: true,required: true %>
   </div>
 
   <div class="field">
-    <%= form.number_field :amount, id: :job_amount,label: "Amount in USD *",required: true %>
+    <%= form.number_field :amount,min: Variable.find_by_name("MIN_PAYMENT").value,max: Variable.find_by_name("MAX_PAYMENT").value, id: :job_amount,label: "Amount in USD*",required: true %>
   </div>
-
+  
   <div class="field">
-    <%= form.select :online, [["Choose your job type",2],["Online", 1], ["Local", 0]],{ label: "Choose your job type *" },{class: "selectpicker",required: true} %>
-    <!--<= form.check_box :online, id: :job_online,label: "Online/Local"%>-->
+    <label>File Attachment (pdf/doc/docx/xlsx/csv/jpg/png/txt)</label>
+    <%= form.file_field :document,hide_label: true, id: :job_amount %>
   </div>
 
-  <div class="field" id="address">
+    <%= form.hidden_field :online, id: :job_online,value: true %>
+  <%#=<div class="field">
+    <%#= form.select :online, [["Choose your job type",2],["Online", 1], ["Local", 0]],{ label: "Choose your job type *" },{class: "selectpicker",required: true} %>
+  <%#=</div>
+
+  <%#=<div class="field" id="address">
     <%= form.label "Address *" %>
-    <%= form.text_area :address, id: :job_address,hide_label: true %>
-  </div>
+    <%#= form.text_area :address, id: :job_address,hide_label: true %>
+  <%#=</div>%>
 
   <div class="field">
     <%= form.hidden_field :user_id, id: :job_user_id,hide_label: true %>
@@ -65,6 +75,30 @@
 
 
 <script>
+$(document).ready(function(){
+   $('#job_category_id_web').change(function(){
+     $('#job_subcategory_id_web')
+            .empty();
+    var value = (this).value;
+    <% Category.all.each do |category| %>
+      if (value == <%= category.id %>){
+        var selectv = $('#job_subcategory_id_web');
+        $.each(selectv, function(value, key) {
+          <% category.subcategories.each do |category| %>
+            var subcategories = <%= category.id %>;
+            var subcategories_names = "<%= raw(category.name) %>";
+            
+            $('#job_subcategory_id_web')
+            .append($("<option></option>")
+            .attr("value",subcategories)
+            .text(subcategories_names));
+          <% end %>
+        });
+      }
+    <% end %>
+
+  });
+});  
   $(document).ready(function(){
     $('#address').css("display", "none");
 });

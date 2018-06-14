@@ -11,7 +11,7 @@ html {
 
 body {
 	background-color: #FFF;
-	color: #777;
+	color: #000;
 	font-family: Arial, sans-serif;
 	font-size: 14px;
 	line-height: 22px;
@@ -541,7 +541,7 @@ html:not(.sticky-header-active) #header.header-transparent-sticky-deactive.heade
 
 	#header .header-nav-main nav > ul > li.dropdown .dropdown-menu li a {
 		border-bottom: 1px solid #f4f4f4;
-		color: #777;
+		color: #000;
 		font-size: 0.8em;
 		font-weight: 400;
 		padding: 6px 20px 6px 8px;
@@ -668,7 +668,7 @@ html:not(.sticky-header-active) #header.header-transparent-sticky-deactive.heade
 	#header .header-nav-main nav > ul > li.dropdown-mega .dropdown-mega-sub-nav > li > a {
 		border: 0 none;
 		border-radius: 4px;
-		color: #777;
+		color: #000;
 		display: block;
 		font-size: 0.8em;
 		font-weight: normal;
@@ -1495,7 +1495,7 @@ html:not(.sticky-header-active) #header.header-transparent-sticky-deactive.heade
 /* Mega Menu (Signin/SignUp) */
 #header .header-nav-main nav > ul > li.dropdown-mega.dropdown-mega-signin label {
 	font-size: 0.9rem;
-	color: #777;
+	color: #000;
 }
 
 #header .header-nav-main nav > ul > li.dropdown-mega.dropdown-mega-signin .dropdown-menu {
@@ -2736,7 +2736,7 @@ section.section-custom-map-2 section.section {
 }
 
 .home-intro .get-started a:not(.btn) {
-	color: #777;
+	color: #000;
 }
 
 .home-intro .learn-more {
@@ -2752,7 +2752,7 @@ section.section-custom-map-2 section.section {
 }
 
 .home-intro.light p {
-	color: #777;
+	color: #000;
 }
 
 /* Home Intro Compact */
@@ -3040,7 +3040,7 @@ section.section-custom-map-2 section.section {
 }
 
 .page-not-found h4 {
-	color: #777;
+	color: #000;
 }
 
 .page-not-found p {
@@ -3654,12 +3654,12 @@ html.dark .text-muted {
 }
 
 #footer.light .footer-copyright p {
-	color: #777;
+	color: #000;
 }
 
 #footer.light .phone,
 #footer.light .twitter-account {
-	color: #777;
+	color: #000;
 }
 
 #footer.light ul.nav-pills > li > a.active {
@@ -4329,7 +4329,7 @@ html.dark .table-striped > tbody > tr:nth-child(2n+1) > th {
 html.dark pre {
 	background-color: #282d36;
 	border-color: #282d36;
-	color: #777;
+	color: #000;
 }
 
 html.dark .show-grid [class*="col-lg-"] .show-grid-block {
@@ -4488,7 +4488,7 @@ html.dark .pricing-table h3 span {
 	background: #282d36;
 	border-color: #242830;
 	box-shadow: 0 5px 20px #242830 inset, 0 3px 0 #282d36 inset;
-	color: #777;
+	color: #000;
 }
 
 html.dark .pricing-table .most-popular {
@@ -4508,7 +4508,7 @@ html.dark .pricing-table .plan-ribbon {
 html.dark .pricing-table .plan {
 	background: #282d36;
 	border: 1px solid #282d36;
-	color: #777;
+	color: #000;
 	text-shadow: none;
 }
 
@@ -4547,7 +4547,7 @@ html.dark .modal-header {
 }
 
 html.dark .modal-header h1, html.dark .modal-header h2, html.dark .modal-header h3, html.dark .modal-header h4, html.dark .modal-header h5, html.dark .modal-header h6 {
-	color: #777;
+	color: #000;
 }
 
 html.dark .modal-header .close {
@@ -4575,7 +4575,7 @@ html.dark .sort-destination-loader:after {
 html.dark #footer .newsletter form .btn-light {
 	background-color: #21262d;
 	border-color: #21262d;
-	color: #777;
+	color: #000;
 }
 
 html.dark #footer .newsletter form .form-control {

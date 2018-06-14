@@ -1,5 +1,5 @@
 <div class="container-fluid dash-container" style="padding:0">
-    <ul class="dashnav">
+    <ul class="dashnav" style="overflow:hidden;">
         <li>
             <% if controller_name=="admin_panel" and action_name=="index" %>
                 <a class="active" href="/admin_panel">Dashboard</a>
@@ -44,10 +44,26 @@
                 <a href="/variables">Variables</a>
             <% end %>
         </li>
+        <li>
+            <% if controller_name=="categories" %>
+                <a class="active" href="/categories">Categories</a>
+            <% else %>
+                <a href="/categories">Categories</a>
+            <% end %>
+        </li>
+        
         <li class="float-right">
             <% if user_signed_in? and current_user.admin %>
       			<a href="<%= main_app.destroy_user_session_path %>" data-method="delete">Log Out</a>
       		<% end %>
+        </li>
+        
+        <li>
+            <% if controller_name=="admin_panel" and action_name=="notifications" %>
+                <a class="active" href="/admin_panel/notifications">Notifications</a>
+            <% else %>
+                <a href="/admin_panel/notifications">Notifications<span class="badge badge-danger" id="notification-counter"><%= current_user.notifications.where(read: false).count %> </span></a>
+            <% end %>
         </li>
     </ul>
 </div>

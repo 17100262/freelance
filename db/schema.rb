@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180502080836) do
+ActiveRecord::Schema.define(version: 20180614102350) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -88,8 +88,13 @@ ActiveRecord::Schema.define(version: 20180502080836) do
     t.float "amount"
     t.boolean "online"
     t.text "address"
+    t.string "document_file_name"
+    t.string "document_content_type"
+    t.integer "document_file_size"
+    t.datetime "document_updated_at"
     t.bigint "user_id"
     t.bigint "category_id"
+    t.bigint "subcategory_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "slug"
@@ -97,7 +102,26 @@ ActiveRecord::Schema.define(version: 20180502080836) do
     t.string "express_payer_id"
     t.index ["category_id"], name: "index_jobs_on_category_id"
     t.index ["slug"], name: "index_jobs_on_slug"
+    t.index ["subcategory_id"], name: "index_jobs_on_subcategory_id"
     t.index ["user_id"], name: "index_jobs_on_user_id"
+  end
+
+  create_table "notifications", force: :cascade do |t|
+    t.string "event"
+    t.bigint "user_id"
+    t.boolean "read"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_notifications_on_user_id"
+  end
+
+  create_table "notifs", force: :cascade do |t|
+    t.string "event"
+    t.bigint "user_id"
+    t.boolean "read"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_notifs_on_user_id"
   end
 
   create_table "reservations", force: :cascade do |t|
@@ -119,6 +143,26 @@ ActiveRecord::Schema.define(version: 20180502080836) do
     t.index ["job_id"], name: "index_reservations_on_job_id"
     t.index ["slug"], name: "index_reservations_on_slug"
     t.index ["user_id"], name: "index_reservations_on_user_id"
+  end
+
+  create_table "statements", force: :cascade do |t|
+    t.bigint "user_id"
+    t.string "email"
+    t.float "amount"
+    t.string "status"
+    t.string "slug"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["slug"], name: "index_statements_on_slug", unique: true
+    t.index ["user_id"], name: "index_statements_on_user_id"
+  end
+
+  create_table "subcategories", force: :cascade do |t|
+    t.string "name"
+    t.bigint "category_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["category_id"], name: "index_subcategories_on_category_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -163,6 +207,7 @@ ActiveRecord::Schema.define(version: 20180502080836) do
     t.string "unlock_token"
     t.datetime "locked_at"
     t.boolean "online", default: false
+    t.string "paypal_email"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
@@ -180,7 +225,12 @@ ActiveRecord::Schema.define(version: 20180502080836) do
   add_foreign_key "blocked_users", "jobs"
   add_foreign_key "blocked_users", "users"
   add_foreign_key "jobs", "categories"
+  add_foreign_key "jobs", "subcategories"
   add_foreign_key "jobs", "users"
+  add_foreign_key "notifications", "users"
+  add_foreign_key "notifs", "users"
   add_foreign_key "reservations", "jobs"
   add_foreign_key "reservations", "users"
+  add_foreign_key "statements", "users"
+  add_foreign_key "subcategories", "categories"
 end

@@ -2,7 +2,7 @@
 
 <h1>Reservations</h1>
 
-<table>
+<table class="table">
   <thead>
     <tr>
       <th>User</th>
@@ -15,8 +15,8 @@
   <tbody>
     <% @reservations.each do |reservation| %>
       <tr>
-        <td><%= reservation.user %></td>
-        <td><%= reservation.job %></td>
+        <td><%= reservation.user.name %></td>
+        <td><%= reservation.job.title %></td>
         <td><%= reservation.ending_time %></td>
         <td><%= link_to 'Show', reservation %></td>
         <td><%= link_to 'Edit', edit_reservation_path(reservation) %></td>

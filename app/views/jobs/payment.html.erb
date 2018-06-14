@@ -2,7 +2,10 @@
 <div class="container mt-lg">
     <div class="card">
         <center>
-            <div class="alert alert-warning">Successfully authenticated from PayPal. Kindly click on "confirm payment" button and your job will go live!</div>
+            <% percent = Variable.find_by_name("CREATION_FEE").value.to_f %>
+            <% amount = (percent/100) * @job.amount %>
+            <div class="alert alert-warning">Successfully authenticated from PayPal. Kindly click on "confirm payment" button and your job will go live! <br>
+            You will be charged $<%= amount%> (<%=percent%>% of Job Amount) as Job Creation Fee</div>
         <h2>Payment Summary</h2>
         <table class="table">
             <tr>
@@ -21,12 +24,13 @@
                 <td>Deliverables</td>
                 <td><%= @job.deliverables %></td>
             </tr>
+            
         </table>
         <% if @express_token.present? %>
             <% details =  EXPRESS_GATEWAY.details_for(@express_token) %>
             <%= form_tag "/jobs/confirm_payment/#{@job.slug}" do %>
                 <%= hidden_field_tag :express_token,@express_token %>
-                <%= submit_tag "Confirm Payment", class: "btn btn-primary" %>
+                <%= submit_tag "Confirm Payment of $#{amount}", class: "btn btn-primary" %>
             <% end %>
         <% end %>
         </center>

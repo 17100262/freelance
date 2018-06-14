@@ -1,0 +1,15 @@
+<div class="container-fluid pt-5 pb-5" style="background:#F7F7F7">
+  <div class="row">
+    <div class="loginmodal-container">
+	    <div class="loginmodal-container-2">
+        <h1>Editing Subcategory</h1>
+        
+        <%= render 'form', subcategory: @subcategory %>
+        <div class="text-center">
+          <%= link_to 'Show', @subcategory, class:"btn btn-primary btn-sm" %> |
+          <%= link_to 'Back', subcategories_path, class:"btn btn-primary btn-sm"  %>
+        </div>
+      </div> 
+    </div>
+  </div>
+</div>  

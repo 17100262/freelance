@@ -53,6 +53,7 @@
                         <thead>
                         </thead>
                         <tbody>
+                            <tr><td>PayPal Email:</td><td><%= (@user.paypal_email if @user.paypal_email.present?) || "Not Provided"%></td></tr>
                             <tr><td>Portfolio:</td><td><%= (@user.portfolio if @user.portfolio.present? ) || "Not Provided"  %></td></tr>
                             <tr><td>Undergrad Degree:</td><td><%= (@user.linkedin_link if @user.linkedin_link.present? ) || "Not Provided" %></td></tr>
                             <tr><td>Undergrad University:</td><td><%= (@user.githhub_link if @user.githhub_link.present? ) || "Not Provided" %></td></tr>

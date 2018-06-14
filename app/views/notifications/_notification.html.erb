@@ -1,0 +1,7 @@
+
+  <div class="alert notification" style="padding: 10px; margin-bottom: 15px;">
+    
+      <%= notification.event.html_safe %>
+      <small class="pull-right"> (<%= time_ago_in_words(notification.created_at) %> ago)</small>
+    
+  </div>

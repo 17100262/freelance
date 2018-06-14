@@ -50,5 +50,13 @@
                 <a href="/reservations_as_worker">Reservations as Worker <% if uraw > 0  %> <span class="badge badge-primary"><%= uraw %> </span><% end %></a>
             <% end %>
         </li>
+        
+        <li>
+            <% if controller_name=="user_panel" and action_name=="notifications" %>
+                <a class="active" href="/notifications"><i class="fa fa-2x fa-bell hidden-md hidden-lg"></i><span class="hidden-sm hidden-xs">Notifications</span> </a>
+            <% else %>
+                <a href="/notifications"><i class="fa fa-2x fa-bell hidden-md hidden-lg"></i><span class="hidden-sm hidden-xs">Notifications </span> <span class="badge badge-danger" id="notification-counter"><%= current_user.notifications.where(read: false).count %> </span></a>
+            <% end %>
+        </li>
     </ul>
 </div>

@@ -22,7 +22,8 @@
 
 
 
-;(function (window, navigator, $, undefined) {
+
+$(function (window, navigator, $, undefined) {
 
     "use strict";
 

@@ -9,19 +9,32 @@
 				<% end %>	
 					<div class="header-row">
 						<div class="header-logo my-2">
-							<a href="/" style="text-decoration:none;">
-								<img alt="Freelance" height="48px" src="/logo_temp.jpg">&nbsp;&nbsp; <strong style="font-size:25px; vertical-align: middle;">FREELANCE</strong>
-							</a>
+						<a href="/" style="text-decoration:none;">
+						<img alt="Freelance" height="48px" src="/logo_temp.jpg">&nbsp;&nbsp; <strong style="font-size:25px; vertical-align: middle;">Quick Jobs</strong>
+						</a>
 						</div>
 					</div>
 				</div>
 				<% if !(user_signed_in? and current_user.admin) %>
-						<div class="header-column justify-content-end">
-							<div class="header-row">
+					<div class="header-column justify-content-end">
+						<div class="header-row">
 						<div class="header-nav">
 							<div class="header-nav-main header-nav-main-effect-1 header-nav-main-sub-effect-1">
 								<nav class="collapse">
 									<ul class="nav nav-pills" id="mainNav">
+									 <li class="search-btn">
+									 	<span class="job-search">
+										 	<%= form_tag('/jobs', method: :get) do %>
+										 <div class="input-group">
+										  <%= text_field_tag :search,params[:search], class: "form-control form-control-md", placeholder: "Search Jobs" %>  
+										  <div class="input-group-append">
+										  	<%= submit_tag "Search", class:"btn btn-primary" %>
+										  </div>
+										</div>
+										 <% end %>
+									 </span>
+									 </li>
+									 
 				                      <% if user_signed_in? %>
 				                       <% if !current_user.admin %>
 				                        <!--  <li class="">-->
@@ -35,32 +48,39 @@
 				                    		<li class="">
 				                          <a class="nav-link" href="/jobs">Jobs</a>
 				                        </li>
-				                        <li class="">
+				                        <li class="dropdown">
 											<a class="dropdown-toggle" href="" data-toggle="dropdown" title="Employer Area">Employer</a>
 											<div class="dropdown-menu">
 												<a class="dropdown-item" href="<%= main_app.user_empjobs_path%>">Jobs as Employer</a>
 												<a class="dropdown-item" href="<%= main_app.user_empreserves_path%>">Reservations as Employer</a>
 											</div>
 										</li>
-										<li class="">
+										<li class="dropdown">
 											<a class="dropdown-toggle" href="" data-toggle="dropdown" title="Worker Area">Worker</a>
 											<div class="dropdown-menu">
-												<a class="dropdown-item" href="<%= main_app.user_workjobs_path%>">Jobs as Worker</a>
 												<a class="dropdown-item" href="<%= main_app.user_workerreserves_path %>">Reservations as Worker</a>
 											</div>
 										</li>
-				                        <li class="">
-				                          <a class="nav-link" href="/messenger/inbox">Inbox</a>
-				                        </li>
-				                        <li class="">
-				                          <a class="nav-link" href="<%= main_app.profiles_path(current_user) %>">Profile</a>
-				                        </li>
+				                        
+				                        
 				                        <li class="">
 				                          <a class="nav-link" href="<%= main_app.user_payments_path %>">Payments</a>
 				                        </li>
 				                        <li class="">
-				                          <a class="nav-link" href="<%= main_app.edit_user_registration_path %>">Settings</a>
+				                          <a class="nav-link" href="/messenger/inbox"><i class="fas fa-envelope fa-2x"></i></a>
 				                        </li>
+				                        <li class="">
+				                        	<a class="nav-link" href="/notifications"><i class="fas fa-bell fa-2x"></i><span class="badge badge-danger" id="notification-counter"><%= current_user.notifications.where(read: false).count %> </span></a>
+				                        </li>
+				                        <li class="dropdown">
+											<a class="dropdown-toggle" href="" data-toggle="dropdown"><i class="fas fa-user fa-2x"></i></a>
+											<div class="dropdown-menu">
+												<a class="dropdown-item" href="<%= main_app.profiles_path(current_user) %>">Profile</a>
+												<a class="dropdown-item" href="<%= main_app.edit_user_registration_path %>">Settings</a>
+												
+				                      			<a class="dropdown-item" href="<%= main_app.destroy_user_session_path %>" data-method="delete">Logout</a>
+											</div>
+										</li>
 				                      <% end %>
 				                      <% end %>
 				                      	<li class="">
@@ -68,14 +88,12 @@
 				                      			<a class="nav-link" href="<%= main_app.new_user_registration_path %>">Sign Up</a></li>
 				                      			<li class=""><a class="nav-link" href="<%= main_app.new_user_session_path %>">Log In</a>
 				                      		<% end %>
-				                      		<% if user_signed_in? and !current_user.admin%>
-				                      			<a class="nav-link" href="<%= main_app.destroy_user_session_path %>" data-method="delete">Log Out</a>
-				                      		<% else %>
-						                   <% end %>
+				                      		
 						               </li>
+						               
 										<% if !(user_signed_in? and current_user.admin) %>
 											<li>
-				                    			<%= link_to "Post new Job",main_app.new_job_path, class:"btn btn-primary btn-sm" %>
+				                    			<%= link_to "Post new Job",main_app.new_job_path,title: "Post New Job as Employer", class:"btn btn-primary btn-sm" %>
 				                    		</li>
 				                    	<% end %>
 				              		</ul>
@@ -86,7 +104,7 @@
 							</button>
 						</div>
 					</div>
-				</div>
+					</div>
             	<% else %>
 				<% end %>
 					

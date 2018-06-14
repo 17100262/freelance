@@ -1,180 +1,294 @@
-<section class="ee-hero-section head-hero head-bg-oded  head-full-screen-logobar" style="padding:0;">
-  <div class="container">
-    <div class="row">
-      <div class="col-12 col-sm-8 col-md-6 col-lg-6">
-        <h1 class="m-t-md m-b-lg">Get More Done<br/>Quickly and Conveniently</h1>
-      </div>
+<!--<section class="ee-hero-section head-hero head-bg-oded  head-full-screen-logobar" style="padding:0;">-->
+<!--  <div class="container">-->
+<!--    <div class="row">-->
+<!--      <div class="col-12 col-sm-8 col-md-6 col-lg-6">-->
+<!--        <h1 class="m-t-md m-b-lg">Get More Done<br/>Quickly and Conveniently</h1>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</section>     -->
+<section class="services-section mt-4">
+  <div class="row">
+    <div class="col-lg-12">
+      <h2 class="text-center">QuickJobs.Work: On-Demand Freelancing</h2>
     </div>
   </div>
-</section>        
-<section  class="features-section bg-cloud">
-  <div class="container hiring-cases-wrapper">
-    <ul class="row text-carbon list-unstyled m-b-0">
-      <li class="title item col-12 col-lg-3 offset-lg-0">
-        <h4 class="font-gotham">
-          Hire for any scope of work:
-        </h4>
-      </li>
-      <li class="item col-12 col-lg-3 offset-lg-0 col-sm-4 offset-sm-0">
-        <div class="use-case">
-          <h4 class="font-gotham-bold">
-            Short-term tasks
-          </h4>
-          <span class="font-gotham text-short">
-            Build a pool of diverse experts for one-off tasks
+<!--<div class="featured-boxes featured-boxes-style-3 featured-boxes-flat">-->
+<!--	<div class="row">-->
+<!--		<div class="col-lg-3 col-sm-6">-->
+<!--			<div class="featured-box featured-box-primary featured-box-effect-4">-->
+<!--				<div class="box-content">-->
+<!--					<i class="icon-featured"><img src="/icon1.png"></i>-->
+<!--					<h4 class="text-dark">Want a job done online?</h4>-->
+<!--					<p>Save time evaluating proposals with on-demand freelancing - Experts find the jobs they can do well</p>-->
+<!--				</div>-->
+<!--			</div>-->
+<!--		</div>-->
+<!--		<div class="col-lg-3 col-sm-6">-->
+<!--			<div class="featured-box featured-box-primary featured-box-effect-4">-->
+<!--				<div class="box-content">-->
+<!--					<i class="icon-featured"><img src="/icon2.png"></i>-->
+<!--					<h4 class="text-dark">Control your costs & timelines</h4>-->
+<!--					<p>Create a job for a payment of $10 to $100 and duration of 1 to 5 days <br><br></p>-->
+<!--				</div>-->
+<!--			</div>-->
+<!--		</div>-->
+<!--		<div class="col-lg-3 col-sm-6">-->
+<!--			<div class="featured-box featured-box-primary featured-box-effect-4">-->
+<!--				<div class="box-content">-->
+<!--					<i class="icon-featured"><img src="/icon3.png"></i>-->
+<!--					<h4 class="text-dark">Want to freelance online?</h4>-->
+<!--					<p>Reserve & work a job within your expertise. No need to make a proposal – just get working! </p>-->
+<!--				</div>-->
+<!--			</div>-->
+<!--		</div>-->
+<!--		<div class="col-lg-3 col-sm-6">-->
+<!--			<div class="featured-box featured-box-primary featured-box-effect-4">-->
+<!--				<div class="box-content">-->
+<!--					<i class="icon-featured"><img src="/icon4.png"></i>-->
+<!--					<h4 class="text-dark">Payment upon approval</h4>-->
+<!--					<p>Get paid for the work you complete as soon as it’s approved<br><br></p>-->
+<!--				</div>-->
+<!--			</div>-->
+<!--		</div>-->
+<!--	</div>-->
+<!--</div>-->
+  <ul class="llist list-unstyled clearfix m-b-xl">
+    <li>
+      <span class="service">
+          <span class="front">
+            <i class="fas fa-user-md"></i>
+            <h4 class="text-dark">Want a job done online?</h4>
+					  <p>Save time evaluating proposals with on-demand freelancing - Experts find the jobs they can do well</p>
           </span>
-        </div>
-      </li>
-      <li class="item col-12 col-lg-3 offset-lg-0 col-sm-4 offset-sm-0">
-        <div class="use-case">
-          <h4 class="font-gotham-bold">
-            Recurring projects
-          </h4>
-          <span class="font-gotham text-short">
-            Have a go-to team with specialized skills
+      </span>
+    </li>
+    <li>
+      <span class="service">
+          <span class="front">
+            <i class="fas fa-tasks"></i>
+            <h4 class="text-dark">Control your costs & timelines</h4>
+					  <p>Create a job for a payment of $<%= Variable.find_by_name("MIN_PAYMENT").value %> to $<%= Variable.find_by_name("MAX_PAYMENT").value %> and duration of <%= Variable.find_by_name("MIN_DURATION").value %> to <%= Variable.find_by_name("MAX_DURATION").value %> days <br><br></p>
           </span>
-        </div>
-      </li>
-      <li class="item col-12 col-lg-3 offset-lg-0 col-sm-4 offset-sm-0" ng-scroll-impression="hiring-use-cases">
-        <div class="use-case">
-          <h4 class="font-gotham-bold">
-            Full-time contract work
-          </h4>
-          <span class="font-gotham text-short">
-            Expand your staff with a dedicated team
+      </span>
+    </li>
+    <li>
+      <span class="service">
+          <span class="front">
+            <i class="fas fa-globe"></i>
+            <h4 class="text-dark">Want to freelance online?</h4>
+					  <p>Reserve & work a job within your expertise. No need to make a proposal – just get working! </p>
           </span>
-        </div>
-      </li>
-    </ul>
-  </div>
-</section>  
+      </span>
+    </li>
+    <li>
+      <span class="service">
+          <span class="front">
+            <i class="fas fa-money-bill"></i>
+            <h4 class="text-dark">Payment upon approval</h4>
+					  <p>Get paid for the work you complete as soon as it’s approved<br><br></p>
+          </span>
+      </span>
+    </li>
+
+  </ul>
+</section>
+
+<!--<section  class="features-section bg-cloud">-->
+<!--  <div class="container hiring-cases-wrapper">-->
+<!--    <ul class="row text-carbon list-unstyled m-b-0">-->
+<!--      <li class="title item col-12 col-lg-3 offset-lg-0">-->
+<!--        <h4 class="font-gotham">-->
+<!--          Hire for any scope of work:-->
+<!--        </h4>-->
+<!--      </li>-->
+<!--      <li class="item col-12 col-lg-3 offset-lg-0 col-sm-4 offset-sm-0">-->
+<!--        <div class="use-case">-->
+<!--          <h4 class="font-gotham-bold">-->
+<!--            Short-term tasks-->
+<!--          </h4>-->
+<!--          <span class="font-gotham text-short">-->
+<!--            Build a pool of diverse experts for one-off tasks-->
+<!--          </span>-->
+<!--        </div>-->
+<!--      </li>-->
+<!--      <li class="item col-12 col-lg-3 offset-lg-0 col-sm-4 offset-sm-0">-->
+<!--        <div class="use-case">-->
+<!--          <h4 class="font-gotham-bold">-->
+<!--            Recurring projects-->
+<!--          </h4>-->
+<!--          <span class="font-gotham text-short">-->
+<!--            Have a go-to team with specialized skills-->
+<!--          </span>-->
+<!--        </div>-->
+<!--      </li>-->
+<!--      <li class="item col-12 col-lg-3 offset-lg-0 col-sm-4 offset-sm-0" ng-scroll-impression="hiring-use-cases">-->
+<!--        <div class="use-case">-->
+<!--          <h4 class="font-gotham-bold">-->
+<!--            Full-time contract work-->
+<!--          </h4>-->
+<!--          <span class="font-gotham text-short">-->
+<!--            Expand your staff with a dedicated team-->
+<!--          </span>-->
+<!--        </div>-->
+<!--      </li>-->
+<!--    </ul>-->
+<!--  </div>-->
+<!--</section>  -->
       
 <section class="services-section text-center">
   <div class="">
     <h2 class="m-b-xl m-t-xl">Build a pool of trusted experts for your team</h2>
 
     <ul class="llist list-unstyled clearfix m-b-xl">
-              <li>
-          <a href="#" class="service">
-              <span class="front">
-                <i class="fas fa-mouse-pointer"></i>
-                <span class="service-title">Web developers</span>
-              </span>
-          </a>
-        </li>
-              <li>
-          <a href="#" class="service">
-              <span class="front">
-                <i class="fas fa-mobile-alt"></i>
-                <span class="service-title">Mobile developers</span>
-              </span>
-          </a>
-        </li>
-              <li>
-          <a href="#" class="service">
+        <li>
+          <a href="/jobs?category=Graphics+%26+Design" class="service">
               <span class="front">
                 <i class="far fa-object-ungroup"></i>
-                <span class="service-title">Designers &amp; Creatives</span>
+                <span class="service-title">Graphics & Design</span>
               </span>
           </a>
         </li>
-              <li>
-          <a href="#" class="service">
+        <li>
+          <a href="/jobs?category=Digital+Marketing" class="service">
+              <span class="front">
+                <i class="fas fa-mobile-alt"></i>
+                <span class="service-title">Digital Marketing</span>
+              </span>
+          </a>
+        </li>
+        <li>
+          <a href="/jobs?category=Writing+%26+Translation" class="service">
               <span class="front">
                 <i class="far fa-edit"></i>
-                <span class="service-title">Writers</span>
+                <span class="service-title">Writing & Translation</span>
               </span>
           </a>
         </li>
-              <li>
-          <a href="#" class="service">
+        <li>
+          <a href="/jobs?category=Video+%26+Animation" class="service">
               <span class="front">
-                <i class="fas fa-hands-helping"></i>
-                <span class="service-title">Virtual assistants</span>
+                <i class="fas fa-video"></i>
+                <span class="service-title">Video & Animation</span>
               </span>
           </a>
         </li>
-              <li>
-          <a href="#" class="service">
+        <li>
+          <a href="/jobs?category=Music+%26+Audio" class="service">
               <span class="front">
-                <i class="fas fa-user-secret"></i>
-                <span class="service-title">Customer service agents</span>
+                <i class="fas fa-music"></i>
+                <span class="service-title">Music & Audio</span>
               </span>
           </a>
         </li>
-              <li>
-          <a href="#" class="service">
+        <li>
+          <a href="/jobs?category=Programming+%26+Tech" class="service">
+              <span class="front">
+                <i class="fas fa-code"></i>
+                <span class="service-title">Programming & Tech</span>
+              </span>
+          </a>
+        </li>
+        <li>
+          <a href="/jobs?category=Business" class="service">
               <span class="front">
                 <i class="fas fa-briefcase"></i>
-                <span class="service-title">Sales &amp; marketing experts</span>
+                <span class="service-title">Business</span>
               </span>
           </a>
         </li>
-              <li>
-          <a href="#" class="service">
+        <li>
+          <a href="/jobs?category=Lifestyle" class="service">
               <span class="front">
-                <i class="fas fa-calculator"></i>
-                <span class="service-title">Accountants &amp; consultants</span>
+                <i class="far fa-smile"></i>
+                <span class="service-title">Lifestyle</span>
               </span>
           </a>
         </li>
           </ul>
       </div>
     </section>      
-
+<div class="container mt-lg">
+  <h2 class="text-center">Latest Jobs</h2>
+  <table class="table table-striped">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">Date Posted</th>
+      <th scope="col">Category</th>
+      <th scope="col">Title</th>
+      <th scope="col">Amount</th>
+      <th scope="col">Status</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% Job.last(20).each do |job| %>
+      <tr>
+        <th><%= job.created_at.strftime("%d %b ") %></th>
+        <td><%= job.category.name %></td>
+        <td><%= job.title.truncate(80) %></td>
+        <td> $<%= job.amount %></td>
+        <td><%= job.status %></td>
+        
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+</div>
           
-<section class="section-text-blocks how-it-works bg-cloud p-b-lg p-t-xl">
-  <div class="text-center">
-    <h2 class="m-b-xl">How it works</h2>    
-      <div class="row">
-        <div class="m-b-xl col-sm-4 col-lg-3 offset-lg-0 offset-sm-1">
-            <article class="text-block">
-              <header>
-                <i class="fas fa-search"></i>
-                <hr>              
-              </header>
+<!--<section class="section-text-blocks how-it-works bg-cloud p-b-lg p-t-xl">-->
+<!--  <div class="text-center">-->
+<!--    <h2 class="m-b-xl">How it works</h2>    -->
+<!--      <div class="row">-->
+<!--        <div class="m-b-xl col-sm-4 col-lg-3 offset-lg-0 offset-sm-1">-->
+<!--            <article class="text-block">-->
+<!--              <header>-->
+<!--                <i class="fas fa-search"></i>-->
+<!--                <hr>              -->
+<!--              </header>-->
                               
-              <h3 class="text-uppercase m-b-lg">
-                  FIND
-                </h3>  <p class="text-short">Post a job to tell us about your project. We'll quickly match you with the right freelancers.</p>            
-            </article>
-          </div>
-          <div class="m-b-xl col-sm-4 col-lg-3 offset-lg-0 offset-sm-1">
-            <article class="text-block">
-              <header>
-                 <i class="fab fa-hire-a-helper"></i>
-                <hr>              
-              </header>
+<!--              <h3 class="text-uppercase m-b-lg">-->
+<!--                  FIND-->
+<!--                </h3>  <p class="text-short">Post a job to tell us about your project. We'll quickly match you with the right freelancers.</p>            -->
+<!--            </article>-->
+<!--          </div>-->
+<!--          <div class="m-b-xl col-sm-4 col-lg-3 offset-lg-0 offset-sm-1">-->
+<!--            <article class="text-block">-->
+<!--              <header>-->
+<!--                 <i class="fab fa-hire-a-helper"></i>-->
+<!--                <hr>              -->
+<!--              </header>-->
                               
-              <h3 class="text-uppercase m-b-lg">
-                  HIRE
-                </h3>  <p  class="text-short">Browse profiles, reviews, and proposals then interview top candidates. Hire a favorite and begin your project.</p>            
-            </article>
-          </div>
-          <div class="m-b-xl col-sm-4 col-lg-3 offset-lg-0 offset-sm-1">
-            <article class="text-block">
-              <header>
-                 <i class="fas fa-briefcase"></i>
-                <hr>              
-              </header>
+<!--              <h3 class="text-uppercase m-b-lg">-->
+<!--                  HIRE-->
+<!--                </h3>  <p  class="text-short">Browse profiles, reviews, and proposals then interview top candidates. Hire a favorite and begin your project.</p>            -->
+<!--            </article>-->
+<!--          </div>-->
+<!--          <div class="m-b-xl col-sm-4 col-lg-3 offset-lg-0 offset-sm-1">-->
+<!--            <article class="text-block">-->
+<!--              <header>-->
+<!--                 <i class="fas fa-briefcase"></i>-->
+<!--                <hr>              -->
+<!--              </header>-->
                               
-              <h3 class="text-uppercase m-b-lg">
-                  WORK
-                </h3>  <p class="text-short">Use the Upwork platform to chat, share files, and collaborate from your desktop or on the go.</p>            
-            </article>
-          </div>
-          <div class="m-b-xl col-sm-4 col-lg-3 offset-lg-0 offset-sm-1">
-            <article class="text-block">
-              <header>
-                 <i class="far fa-money-bill-alt"></i>
-                <hr>              
-              </header>
+<!--              <h3 class="text-uppercase m-b-lg">-->
+<!--                  WORK-->
+<!--                </h3>  <p class="text-short">Use the Upwork platform to chat, share files, and collaborate from your desktop or on the go.</p>            -->
+<!--            </article>-->
+<!--          </div>-->
+<!--          <div class="m-b-xl col-sm-4 col-lg-3 offset-lg-0 offset-sm-1">-->
+<!--            <article class="text-block">-->
+<!--              <header>-->
+<!--                 <i class="far fa-money-bill-alt"></i>-->
+<!--                <hr>              -->
+<!--              </header>-->
                               
-              <h3 class="text-uppercase m-b-lg">
-                  PAY
-                </h3>  <p  class="text-short">Invoicing and payments happen through Upwork. With Upwork Protection, only pay for work you authorize.</p>            
-            </article>
-          </div>
-      </div>
-    </div>    
-</section>
+<!--              <h3 class="text-uppercase m-b-lg">-->
+<!--                  PAY-->
+<!--                </h3>  <p  class="text-short">Invoicing and payments happen through Upwork. With Upwork Protection, only pay for work you authorize.</p>            -->
+<!--            </article>-->
+<!--          </div>-->
+<!--      </div>-->
+<!--    </div>    -->
+<!--</section>-->
+
+

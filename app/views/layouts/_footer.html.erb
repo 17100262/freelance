@@ -9,13 +9,27 @@
     			<div class="col-lg-4">
     				<nav id="sub-menu">
     					<ul>
-    						<li><a href="#">FAQ's</a></li>
-    						<li><a href="#">Sitemap</a></li>
     						<li><%= link_to "Contact Customer Support", chat_engine.chats_path({user_type: "User",user_id: User.admins.first.id }),method: :post %></li>
+    						<li><a href="mailto:email@quickjobs.work">email@quickjobs.work</a></li>
     					</ul>
     				</nav>
     			</div>
     		</div>
     	</div>
     </div>
+ <!--PLEASE DO NOT EDIT / CHANGE / REMOVE THIS DIV-->
+<% if user_signed_in? %>
+    <div id="recepient" data-recepient="User_<%= current_user.id %>"></div>
+<% end %>
+ <!--END OF THIS SUPER IMPORTANT DIV-->
+ <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-98341939-3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-98341939-3');
+</script>
+
 </footer>

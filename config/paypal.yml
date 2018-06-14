@@ -1,0 +1,12 @@
+development: &default
+  # Mode can be 'live' or 'sandbox'
+  mode: sandbox
+  # Credentials for REST APIs
+  client_id: AQ2ck4KrcTEnwJVZ30V9c_EIXPo6MW7ztyMRLyt2rBEPdcgazAB-yzQu8GXW5ddWrywkLQbE1S6KoyPd
+  client_secret: EACCEN9qxxbWA2HffHXQETocP3LfAlxZiepCqvX89rZ2mkwdiLvnL2js3d5fK9rLOGhVV70aMsFBAqeu
+test:
+  <<: *default
+production:
+  <<: *default
+  #   mode: live
+  mode: sandbox

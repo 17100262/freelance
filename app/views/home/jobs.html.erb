@@ -13,10 +13,12 @@
   		<div class="row">
         <div class="col-md-12">
           <div class="job-text">
+              <div class="job-detail mr-1"><%= job.category.name %></div> <div class="job-detail"><%= job.subcategory.name %></div>
               <h4 title="<%= job.title %>"><%= link_to job.title.truncate(95),job_path(job.slug) %></h4>
-              <div class="mb-2"><span class="text-muted job-info"> - Duration: <%= job.duration %> Days - Budget: $<%= job.amount  %> - Posted <%= time_ago_in_words(job.created_at) %> ago</span></div>
+              <div class="mb-2"><span class="text-muted job-info"><%= job.user.name %> - Reserve Job for: <%= job.duration %> Days - Budget: $<%= job.amount  %> - Posted <%= time_ago_in_words(job.created_at) %> ago</span></div>
               <div class="mb-2"><%= job.description.truncate(400) %></div>
-              <div class="job-detail"><%= job.category.name %></div>
+              <!--<div class="mb-2">Reservation Period: <= @factor %> Days</div>-->
+              
               <%#<div class="mt-2"><strong>About Client &nbsp;&nbsp; </strong><span class="rating rating<%= job.id >"></span></div>%>
           </div>    
 		    </div>
@@ -24,6 +26,9 @@
     </div>
    
 <% end %>
+<div class="digg_pagination mb-3">
+      <%= will_paginate @jobs %>
+    </div>
 </div>
 
 <script>

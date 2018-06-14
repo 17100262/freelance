@@ -1,8 +1,17 @@
 <div class="container p-4">
 	<div class="featured-boxes featured-boxes-style-8">
-      <span class="badge badge-primary"><%= @job.status %> </span>  
+    
     <div class="row">
 	    <div class="col-md-8">
+	      <% if user_signed_in? and current_user == @job.user and @job.status == "PENDING" %>
+        <div class="featured-box featured-box-primary featured-box-text-left mt-0">
+            <center>
+                <p>For your job to go live, the payment amount and job creation fee will be charged. If your job is completed satisfactorily, the payment will be sent to the worker. In the event that your job is not completed satisfactorily, the payment amount will be refunded to you. The job creation fee is non-refundable.</p>
+                <%= link_to image_tag("https://www.paypal.com/en_US/i/btn/btn_xpressCheckout.gif"), express_job_path %>
+            </center>
+        </div>
+      <% end %>
+      <span class="badge badge-primary"><%= @job.status %> </span> 
 	      <div class="heading heading-primary heading-border heading-bottom-border">
           <h1><%= @job.title %></h1>
         </div> 
@@ -27,21 +36,14 @@
             <%= @job.deliverables %>
           </div>
         </div>
-        <div class="featured-box featured-box-primary featured-box-text-left mt-0">
-          <% if user_signed_in? and current_user == @job.user and @job.status == "PENDING" %>
-            <center>
-                <p>You need to process payment before your Job goes live.</p>
-                <%= link_to image_tag("https://www.paypal.com/en_US/i/btn/btn_xpressCheckout.gif"), express_job_path %>
-            </center>
-          <% end %>
-        </div>
+        
       </div>
       <div class="col-md-4">
         <div class="featured-box featured-box-primary featured-box-text-left mt-0">
     			<div class="box-content p-mb-0">
             <p>
-              <strong>Duration:</strong>
-              <%= @job.duration %>
+              <strong>Reserve Job for:</strong>
+              <%= pluralize(@job.duration,'Day') %>
             </p>
             
             <p>
@@ -51,7 +53,7 @@
             
             <p>
               <strong>Amount:</strong>
-              <%= @job.amount %>
+              $<%= @job.amount %>
             </p>
             
             <p>
@@ -69,10 +71,16 @@
               <strong>User:</strong>
               <%= @job.user.email %>
             </p>
+            <% if @job.document.present? %>
+              <%= link_to "View Attached File", @job.document.url,target: "_blank", class:"login loginmodal-button loginmodal-submit mt-1" %>
+            <% end %>
             
+    <center><strong> share on social media</strong> 
+    <%= social_share_button_tag @job.title, desc: @job.description, :image => "https://www.scholarden.com/wp-content/uploads/2016/12/Logo-for-web.png", :allow_sites => %w(twitter facebook google_plus email linkedin) %></center>
+
             <!--< if user_signed_in? and current_user == @job.user %>-->
             
-            
+          
             
              <!--if current user not in blocked users-->
               <% if user_signed_in? %>
@@ -80,7 +88,7 @@
                   <p>You cannot place a reservation on this job as you are blocked from this Job.</p>
                 <% else %>
                   <!--RESERVE FORM-->
-                  <% if !@job.reservations.exists?(user: current_user) %>
+                  <% if !@job.reservations.exists?(user: current_user) or !current_user.admin %>
                     <%= form_for(@job.reservations.new) do |form| %>
                         <%= form.hidden_field :job_id, id: :reservation_job_id,value: @job.id %>
                         <%= form.hidden_field :user_id, id: :reservation_user_id,value: current_user.id %>

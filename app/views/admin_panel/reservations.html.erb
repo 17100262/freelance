@@ -13,11 +13,11 @@
       <%= ('<li class="nav-item active">'.html_safe if @status=="PENDING" ) ||  '<li>'.html_safe %> <a class="nav-link" href="<%=admin_reservations_path(status: 'PENDING')%>">PENDING  <span class="badge badge-default badge-sm <%= ('badge-primary' if @count["PENDING"].present?)%>"><%= @count["PENDING"] || 0 %> </span> </a></li>
       <%= ('<li class="nav-item active">'.html_safe if @status=="LIVE" ) ||  '<li>'.html_safe %> <a class="nav-link" href="<%=admin_reservations_path(status: 'LIVE')%>">LIVE  <span class="badge badge-default badge-sm <%= ('badge-primary' if @count["LIVE"].present?)%>"><%= @count["LIVE"] || 0%> </span></a></li>
       <%= ('<li class="nav-item active">'.html_safe if @status=="PAUSED" ) ||  '<li>'.html_safe %> <a class="nav-link" href="<%=admin_reservations_path(status: 'PAUSED')%>">PAUSED  <span class="badge badge-default badge-sm <%= ('badge-primary' if @count["PAUSED"].present?)%>"><%= @count["PAUSED"] || 0%> </span></a></li>
-      <%= ('<li class="nav-item active">'.html_safe if @status=="RESERVED" ) ||  '<li>'.html_safe %> <a class="nav-link" href="<%=admin_reservations_path(status: 'RESERVED')%>">RESERVED  <span class="badge badge-default badge-sm <%= ('badge-primary' if @count["RESERVED"].present?)%>"><%= @count["RESERVED"] || 0%> </span></a></li>
+      <%= ('<li class="nav-item active">'.html_safe if @status=="INREVISION" ) ||  '<li>'.html_safe %> <a class="nav-link" href="<%=admin_reservations_path(status: 'INREVISION')%>">IN REVISION  <span class="badge badge-default badge-sm <%= ('badge-primary' if @count["INREVISION"].present?)%>"><%= @count["INREVISION"] || 0%> </span></a></li>
       <%= ('<li class="nav-item active">'.html_safe if @status=="DELIVERED" ) ||  '<li>'.html_safe %> <a class="nav-link" href="<%=admin_reservations_path(status: 'DELIVERED')%>">DELIVERED  <span class="badge badge-default badge-sm <%= ('badge-primary' if @count["DELIVERED"].present?)%>"><%= @count["DELIVERED"] || 0%> </span></a></li>
       <%= ('<li class="nav-item active">'.html_safe if @status=="COMPLETED" ) ||  '<li>'.html_safe %> <a class="nav-link" href="<%=admin_reservations_path(status: 'COMPLETED')%>">COMPLETED  <span class="badge badge-default badge-sm <%= ('badge-primary' if @count["COMPLETED"].present?)%>"><%= @count["COMPLETED"] || 0%> </span></a></li>
+      <%= ('<li class="nav-item active">'.html_safe if @status=="REJECTED" ) ||  '<li>'.html_safe %> <a class="nav-link" href="<%=admin_reservations_path(status: 'REJECTED')%>">REJECTED  <span class="badge badge-default badge-sm <%= ('badge-primary' if @count["REJECTED"].present?)%>"><%= @count["REJECTED"] || 0%> </span></a></li>
       <%= ('<li class="nav-item active">'.html_safe if @status=="CANCELLED" ) ||  '<li>'.html_safe %> <a class="nav-link" href="<%=admin_reservations_path(status: 'CANCELLED')%>">CANCELLED  <span class="badge badge-default badge-sm <%= ('badge-primary' if @count["CANCELLED"].present?)%>"><%= @count["CANCELLED"] || 0%> </span></a></li>
-      <%= ('<li class="nav-item active">'.html_safe if @status=="INREVISION" ) ||  '<li>'.html_safe %> <a class="nav-link" href="<%=admin_reservations_path(status: 'INREVISION')%>">IN REVISION  <span class="badge badge-default badge-sm <%= ('badge-primary' if @count["INREVISION"].present?)%>"><%= @count["INREVISION"] || 0%> </span></a></li>
       
     </ul>
   </div>
@@ -46,7 +46,10 @@
           <td><%= link_to reserv.job.title.truncate(100), job_path(reserv.job.slug) %></td>
           <td><%= reserv.job.amount %></td>
           <td><%= reserv.created_at %></td>
-          <td><%= link_to "View Details", reservations_path(reserv.slug), class:"btn btn-link btn-md" %></td>
+          <td><%= link_to "View Details", reservations_path(reserv.slug), class:"btn btn-link btn-md" %>
+          <% if ["PENDING","LIVE","PAUSED","INREVISION"].include?(reserv.status) %>
+          <%= link_to "Cancel this reservation", reservation_path(reserv,:reservation => {status: "CANCELLED"}),method: :put, data: { confirm: 'Are you sure, you want to cancel this reservation?' }, class:"btn btn-link btn-md" %>
+          <% end %></td>
         </tr>
       <% end %>
     </tbody>

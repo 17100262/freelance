@@ -2,6 +2,8 @@ class AdminPanelController < ApplicationController
   before_action :authenticate_user
   
   def index
+    @res_count = Reservation.all.group(:status).count(:status)
+    @jobs_count = Job.all.group(:status).count(:status)
   end
   
   def jobs

@@ -1,33 +1,10 @@
+require 'paypal-sdk-rest'
+include PayPal::SDK::REST
 class ReservationsController < ApplicationController
-  before_action :set_reservation, only: [:show, :edit, :update, :destroy,:express,:payment,:confirm_payment]
+  before_action :set_reservation, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!
   # GET /reservations
   # GET /reservations.json
-  def express
-    amount = (Variable.find_by_name("RESERVATION_FEE").value.to_f / 100) * @reservation.amount * 100
-    response = EXPRESS_GATEWAY.setup_purchase(amount,
-      :ip                => request.remote_ip,
-      :return_url        => payment_reservation_url(@reservation),
-      :cancel_return_url => root_url,
-      :no_shipping => true
-    )
-    redirect_to EXPRESS_GATEWAY.redirect_url_for(response.token)
-  end
-  def payment
-    @express_token = params[:token]
-  end
-  def confirm_payment
-    response = @reservation.purchase(params[:express_token],request.remote_ip)
-    if response.success?
-      ending_time = (@reservation.job.duration / Variable.find_by_name("RESERVATION_FACTOR").value.to_f)*24*60*60
-      @reservation.update(status: "LIVE",ending_time: Time.now + ending_time.seconds)
-      @reservation.job.update(status: "RESERVED")
-      TimerJob.set(wait_until: @reservation.ending_time).perform_later(@reservation,"LIVE")
-      redirect_to @reservation,notice: "Payment Successfull"
-    else
-      redirect_to @reservation,alert: "#{response.message}"
-    end
-  end
   
   def index
     @reservations = Reservation.all
@@ -50,15 +27,25 @@ class ReservationsController < ApplicationController
   # POST /reservations
   # POST /reservations.json
   def create
-    @reservation = Reservation.new(reservation_params)
-    @reservation.amount = @reservation.job.amount
-    respond_to do |format|
-      if @reservation.save
-        format.html { redirect_to express_reservation_path(@reservation) }
-        format.json { render :show, status: :created, location: @reservation }
-      else
-        format.html { render :new }
-        format.json { render json: @reservation.errors, status: :unprocessable_entity }
+    if current_user.check_reservations
+      return redirect_back(fallback_location: root_url,alert: "You already have #{Variable.find_by_name("MAX_RESERVATIONS").value} reservations in progress. Please deliver one of these first to make more reservations.")
+    else
+      @reservation = Reservation.new(reservation_params)
+      ending_time = (@reservation.job.duration / Variable.find_by_name("RESERVATION_FACTOR").value.to_f)*24*60*60
+      @reservation.ending_time = Time.now + ending_time
+      @reservation.status = "LIVE"
+      job = @reservation.job
+      @reservation.amount = @reservation.job.amount
+      respond_to do |format|
+        if @reservation.save
+          @reservation.job.update(status: "RESERVED")
+          TimerJob.set(wait_until: @reservation.ending_time).perform_later(@reservation,"LIVE")
+          format.html { redirect_to @reservation, notice: "Job reserved successfully." }
+          format.json { render :show, status: :created, location: @reservation }
+        else
+          format.html { render :new }
+          format.json { render json: @reservation.errors, status: :unprocessable_entity }
+        end
       end
     end
   end
@@ -70,12 +57,15 @@ class ReservationsController < ApplicationController
       if @reservation.update(reservation_params)
         if params[:reservation][:status] == "LIVE"
           # TimerJob.set(wait_until: @reservation.ending_time).perform_later(@reservation,"LIVE")
+        elsif params[:reservation][:status] == "DELIVERED"
+          Notif.create(event: "<a href='#{reservation_url(@reservation.slug)}'>Worker has delivered the work of a reservation.</a>",user_id: @reservation.job.user.id)
+        elsif params[:reservation][:status] == "INREVISION"
+          Notif.create(event: "<a href='#{reservation_url(@reservation.slug)}'>Employer asked for a Revision.</a>",user_id: @reservation.user.id)
         elsif params[:reservation][:status] == "COMPLETED"
-          @reservation.user.increment!(:balance,@reservation.amount)
+          PayoutJob.perform_later(@reservation,"COMPLETED")
+          
         elsif params[:reservation][:status] == "REJECTED"
-          @reservation.job.user.increment!(:balance,@reservation.amount)
-          @reservation.job.blocked_users.create(user_id: @reservation.user.id)
-          @reservation.job.update(status: "LIVE")
+          PayoutJob.perform_later(@reservation,"REJECTED")
         end
         format.html { redirect_to @reservation, notice: 'Reservation was successfully updated.' }
         format.json { render :show, status: :ok, location: @reservation }

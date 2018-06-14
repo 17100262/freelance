@@ -1,0 +1,20 @@
+<div class="container-fluid pt-5 pb-5" style="background:#F7F7F7">
+<p id="notice"><%= notice %></p>
+
+  <div class="row">
+  	 <div class="loginmodal-container">
+  		<div class="loginmodal-container-2">
+        <h1>
+          <%= @subcategory.name %>
+        </h1>
+        
+          <strong>Category:</strong>
+          <%= @subcategory.category %>
+        <div class="text-center m-3">
+          <%= link_to 'Edit', edit_subcategory_path(@subcategory), class:"btn btn-primary btn-sm" %> |
+          <%= link_to 'Back', subcategories_path, class:"btn btn-primary btn-sm" %>
+        </div>
+      </div>
+    </div>  
+  </div>
+</div>  

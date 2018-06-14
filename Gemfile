@@ -22,7 +22,7 @@ gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.2'
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
-gem 'turbolinks', '~> 5'
+# gem 'turbolinks', '~> 5'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.5'
 # Use Redis adapter to run Action Cable in production
@@ -71,3 +71,13 @@ gem 'redis', '~> 4.0', '>= 4.0.1'
 gem 'activemerchant'
 
 gem "chat_engine", git: "https://github.com/17100262/rails-realtime-chat-gem.git"
+
+gem 'faker'
+gem 'will_paginate'
+gem 'social-share-button'
+
+gem 'mysql2',          '~> 0.3',    :platform => :ruby
+gem 'jdbc-mysql',      '~> 5.1.35', :platform => :jruby
+gem 'thinking-sphinx', '~> 4.0'
+
+gem 'paypal-sdk-rest'

@@ -53,6 +53,7 @@ Rails.application.configure do
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
   
   config.action_mailer.default_url_options = { host: 'https://freelance-a17100262.c9users.io' }
+  config.action_controller.default_url_options = { host: 'https://freelance-a17100262.c9users.io' }
   # config.action_mailer.delivery_method = :sendmail
   config.action_mailer.perform_deliveries = true
   config.action_mailer.raise_delivery_errors = true

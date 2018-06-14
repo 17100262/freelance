@@ -9,8 +9,9 @@ class User < ApplicationRecord
   has_many :jobs_as_employer, class_name: "Job", dependent: :destroy
   
   has_many :reservations
+  has_many :statements
   has_many :jobs_as_worker, :through => :reservations,source: :job
-  
+  has_many :notifications,dependent: :destroy,class_name: "Notif"
   has_many :chat_subscribers, as: :subscriber, class_name: 'ChatEngine::ChatSubscriber'
   has_many :chats, through: :chat_subscribers, class_name: 'ChatEngine::Chat'
   has_many :messages, as: :sender, class_name: 'ChatEngine::Message'
@@ -57,6 +58,21 @@ class User < ApplicationRecord
     else
       return (User.column_names.include? "name" and self.name.present?) ? self.name: self.email.split('@')[0]
     end
+  end
+  
+  def check_reservations
+    max = Variable.find_by_name("MAX_RESERVATIONS").value
+    return self.reservations.where(status: "LIVE").count >= max
+  end
+  
+  def check_reservations
+    max = Variable.find_by_name("MAX_RESERVATIONS").value
+    return self.reservations.where(status: "LIVE").count >= max
+  end
+  
+  def check_jobs
+    max = Variable.find_by_name("MAX_JOBS").value
+    return self.jobs_as_employer.where(status: "LIVE").count >= max
   end
   
 end

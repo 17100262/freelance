@@ -1,7 +1,17 @@
 class ApplicationController < ActionController::Base
-  protect_from_forgery with: :exception
+  protect_from_forgery prepend: true
   before_action :authenticate_user!
   before_action :configure_permitted_parameters, if: :devise_controller?
+  before_action :check_paypal_email
+  
+  def check_paypal_email
+    if user_signed_in?
+      if !current_user.paypal_email.present?
+        flash[:notice] = "Please add PayPal Email for Payouts/Refunds before you continue to use our services"
+        redirect_to edit_user_path(current_user)
+      end
+    end
+  end
   
   def after_sign_in_path_for(resource)
     if params[:redirect_to].present?

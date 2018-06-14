@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
     before_action :authenticate_user!, except: [:complete_sign_up,:completed_sign_up]
-    
+    skip_before_action :check_paypal_email, only: [:edit, :update]
     def edit
         @user = User.find(params[:id])
     end
@@ -42,6 +42,6 @@ class UsersController < ApplicationController
     
     private
     def user_params
-        params.require(:user).permit(:email,:uid,:provider,:name, :username,:phone_number,:identifier,:company_name,:linkedin_link,:githhub_link,:website_link,:portfolio,:other_link1,:other_link2,:other_link3,:experience)
+        params.require(:user).permit(:email,:uid,:provider,:name, :username,:phone_number,:identifier,:company_name,:linkedin_link,:githhub_link,:website_link,:portfolio,:other_link1,:other_link2,:other_link3,:experience, :paypal_email)
     end
 end
