@@ -79,5 +79,6 @@ gem 'social-share-button'
 gem 'mysql2',          '~> 0.3',    :platform => :ruby
 gem 'jdbc-mysql',      '~> 5.1.35', :platform => :jruby
 gem 'thinking-sphinx', '~> 4.0'
+gem 'flying-sphinx',   '~> 2.0'
 
 gem 'paypal-sdk-rest'
