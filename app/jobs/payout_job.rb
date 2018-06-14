@@ -19,7 +19,7 @@ class PayoutJob < ApplicationJob
                 {
                   :recipient_type => 'EMAIL',
                   :amount => {
-                    :value => reservation.amount
+                    :value => reservation.amount,
                     :currency => 'USD'
                   },
                   :note => 'Thanks for your patronage!',
