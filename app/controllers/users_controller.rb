@@ -30,7 +30,7 @@ class UsersController < ApplicationController
         @user.provider = data['provider']
         @user.name = data['info']['name']
         @user.password = Devise.friendly_token[0,20]
-        @user.skip_confirmation!
+        # @user.skip_confirmation!
         
         if @user.save
             sign_in_and_redirect @user, event: :authentication
